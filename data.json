@@ -1,0 +1,32 @@
+{
+  "bookings": [
+    {
+      "id": "1",
+      "name": "Bryanne Rafa Levina",
+      "email": "brafalevinaa06@gmail.com",
+      "date": "2024-03-12",
+      "time": "09:09",
+      "guests": 1
+    }
+  ],
+  "dishes": [
+    {
+      "id": "1",
+      "name": "dd",
+      "price": 3459,
+      "image": "https://picsum.photos/200/300"
+    },
+    {
+      "id": "2",
+      "name": "shah",
+      "price": 1234,
+      "image": "https://picsum.photos/200/300v"
+    },
+    {
+      "id": "3",
+      "name": "as",
+      "price": 123,
+      "image": "https://picsum.photos/200/300"
+    }
+  ]
+}
