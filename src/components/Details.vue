@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card mt-5">
+    <div class="card mt-5" style="outline: red">
       <div class="card-header bg-primary text-white">
         <h4 class="card-title">Event Details</h4>
       </div>

@@ -18,8 +18,7 @@
           <p class="mt-3 text-center costum-login3">
             Forgot your password? <router-link to="/forgot-password"><span style="color: red;">Reset it here</span></router-link>
           </p>
-
-          <button type="submit" class="btn btn-danger btn-block" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
+          <button type="submit" class="btn btn-danger btn-block" style="width: 80px; height: 40px" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
         </form>
         <div v-if="loginError" class="alert alert-danger mt-3" role="alert">
           {{ loginError }}
@@ -99,9 +98,16 @@ const login = async () => {
   background-color: #0056b3;
   border-color: #0056b3;
 }
+#email {
+  width: 270px;
+  height: 30px;
+  border-radius: 5px;
+}
 
-.form-control {
-  width: 480px;
+#password {
+  width: 270px;
+  height: 30px;
+  border-radius: 5px;
 }
 
 .costum-login1 {
@@ -110,6 +116,8 @@ const login = async () => {
 
 .costum-login2 {
   font-size: 18px;
+  color: red;
+  font-weight: bolder;
 }
 
 .costum-login3 {
