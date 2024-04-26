@@ -1,6 +1,6 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center">
-    <div class="card p-4" style="width: 600px; height: 640px;">
+    <div class="card p-4" style="width: 600px; height: 690px;">
       <img src="../assets/register.png" alt="Blood Nation Logo" style="width: 300px;">
       <div class="card-header bg-danger text-white text-center">
         <h4 class="card-title costum-regist1">Register for a Blood Nation Account</h4>
@@ -13,11 +13,11 @@
           </div>
           <div class="mb-3">
             <label for="email" class="form-label costum-regist2">Email address</label>
-            <input type="email" class="form-control2" id="email" v-model="email" placeholder="Enter your email address" required>
+            <input type="email" class="form-control2" id="email" v-model="email" placeholder="Enter your email address" required style="width: 570px;">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label costum-regist2">Password</label>
-            <input type="password" class="form-control2" id="password" v-model="password" placeholder="Enter a password" required>
+            <input type="password" class="form-control2" id="password" v-model="password" placeholder="Enter a password" required style="width: 570px;">
           </div>
           <div class="mb-3">
             <label for="phone" class="form-label costum-regist2">Phone Number</label>
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="card-footer bg-light text-muted text-center">
-        <p class="mt-3 text-center costum-regist3">Already have an account? <router-link to="/">Login</router-link></p>
+        <p class="mt-3 text-center costum-regist3">Already have an account? <router-link to="/login">Login</router-link></p>
       </div>
     </div>
   </div>
@@ -69,7 +69,7 @@ const register = async () => {
     // Registration successful
     isRegistered.value = true;
     setTimeout(() => {
-      router.push('/login'); // Redirecting to login page after 2 seconds
+      router.push('/'); // Redirecting to login page after 2 seconds
     }, 2000);
 
   } catch (error) {
@@ -133,9 +133,15 @@ const register = async () => {
   color: #c82333;
 }
 
-.form-control2{
-  width: 580px;
+.form-control2 {
+  display: block;
+  width: 570px; /* Set the width to 500px to match the length of the other input fields */
+  margin-top: 5px; /* Add some space between label and input */
+  border-radius: 5px;
+  height: 30px;
+  
 }
+
 
 .costum-regist1{
   font-size: 27px;
@@ -143,10 +149,12 @@ const register = async () => {
 
 .costum-regist2{
   font-size: 18px;
+  margin-right: 20px;
 }
 
 .costum-regist3{
   font-size: 17px;
 }
+
+
 </style>
-"
