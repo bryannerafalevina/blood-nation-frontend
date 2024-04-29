@@ -1,5 +1,7 @@
 <template>
   <div class="search-container-md">
+    <input type="text" v-model="searchQuery" placeholder="Search by name" style="margin-top: 100px; margin-left: 80px; width: 400px; height: 30px; margin-right: 10px; border-radius: 5px;">
+    <button @click="search" style="height: 30px; width: 60px;">Submit</button>
     <div v-if="isSubmitted" class="card-container-home">
       <div v-for="(bloodnation, index) in filteredBloodnations" :key="index" class="card">
         <img :src="getBloodnationImage(index)" alt="bloodnation Image" class="bloodnation-image" />
@@ -69,6 +71,20 @@ const filteredBloodnations = computed(() => {
   });
 });
 
+const search = () => {
+  if (!searchQuery.value.trim()) {
+    filteredBloodnations.value = bloodnations.value;
+  } else {
+    filteredBloodnations.value = bloodnations.value.filter(bloodnation => {
+      return bloodnation.name.toLowerCase().includes(searchQuery.value.toLowerCase());
+    });
+  }
+};
+
+
+// const resetSearch = () => {
+//   searchQuery.value = '';
+// };
 
 </script>
   
