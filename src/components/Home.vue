@@ -1,8 +1,20 @@
 <template>
   <div class="search-container-md">
-    <input type="text" v-model="searchQuery" placeholder="Search by name" style="margin-top: 100px; margin-left: 80px; width: 400px; height: 30px; margin-right: 10px; border-radius: 5px;">
-    <button @click="resetSearch" style="height: 30px; width: 60px;">Submit</button>
-  <div class="card-container-home">
+    <div v-if="isSubmitted" class="card-container-home">
+      <div v-for="(bloodnation, index) in filteredBloodnations" :key="index" class="card">
+        <img :src="getBloodnationImage(index)" alt="bloodnation Image" class="bloodnation-image" />
+        <div class="card-content">
+          <h3><b>{{ bloodnation.name }}</b></h3>
+          <p>{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p> <!-- Display formatted date with a comma -->
+          <p class="quota">Quota: {{ bloodnation.quota }} people</p>
+          <p class="detail">{{ bloodnation.detail }}</p>
+          <router-link :to="'/details/' + bloodnation.id" class="details-link">Details</router-link> <!-- Add class for Details link -->
+        </div>
+      </div>
+    </div>
+    <div v-else>
+  <p v-if="!filteredBloodnations.length">No search results.</p>
+  <div v-else class="card-container-home">
     <div v-for="(bloodnation, index) in filteredBloodnations" :key="index" class="card">
       <img :src="getBloodnationImage(index)" alt="bloodnation Image" class="bloodnation-image" />
       <div class="card-content">
@@ -14,50 +26,52 @@
       </div>
     </div>
   </div>
+</div>
+
   </div>
-  </template>
-  
-  <script setup>
-  import { ref, onMounted, computed } from 'vue';
-  
-  const bloodnations = ref([]);
-  const searchQuery = ref('');
-  
-  const fetchBloodnations = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/events');
-      const data = await response.json();
-      bloodnations.value = data;
-    } catch (error) {
-      console.error('Error fetching bloodnations:', error);
-    }
-  };
-  
-  const getBloodnationImage = (index) => {
-    return 'https://source.unsplash.com/featured/?hospital'; // Use the desired Unsplash URL here
-  };
-  
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
-  };
-  
-  onMounted(() => {
-    fetchBloodnations();
+</template>
+
+<script setup>
+import { ref, onMounted, computed } from 'vue';
+
+const bloodnations = ref([]);
+const searchQuery = ref('');
+
+const fetchBloodnations = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/events');
+    const data = await response.json();
+    bloodnations.value = data;
+  } catch (error) {
+    console.error('Error fetching bloodnations:', error);
+  }
+};
+
+const getBloodnationImage = (index) => {
+  return 'https://source.unsplash.com/featured/?hospital'; // Use the desired Unsplash URL here
+};
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+};
+
+onMounted(() => {
+  fetchBloodnations();
+});
+
+const filteredBloodnations = computed(() => {
+  if (!searchQuery.value.trim()) {
+    return bloodnations.value; // Return all blood nations if search query is empty
+  }
+  return bloodnations.value.filter(bloodnation => {
+    return bloodnation.name.toLowerCase().includes(searchQuery.value.toLowerCase());
   });
+});
+
+
+</script>
   
-  const filteredBloodnations = computed(() => {
-    if (!searchQuery.value.trim()) {
-      return bloodnations.value; // Return all blood nations if search query is empty
-    }
-    return bloodnations.value.filter(bloodnation => {
-      return bloodnation.name.toLowerCase().includes(searchQuery.value.toLowerCase());
-    });
-  });
-  
-  
-  
-  </script>
   <style>
   .card-container-home {
     display: grid;
@@ -136,4 +150,3 @@
     margin-top: 200px;
   }
   </style>
-  
