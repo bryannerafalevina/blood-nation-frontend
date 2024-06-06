@@ -5,12 +5,14 @@ import Login from '../views/Login.vue';
 import History from '../views/History.vue';
 import Logout from '../views/Logout.vue';
 import Details from '../views/Details.vue';
-import ForgotPassword from '../views/ForgotPassword.vue';
 import Reservation from '../views/Reservation.vue';
 import User from '../views/User.vue';
 
-const details = () => import("../views/Details.vue")
 
+const details = () => import("../views/Details.vue")
+const reservation = () => import("../views/Reservation.vue")
+const history = () => import("../views/History.vue")
+const user = () => import("../views/User.vue")
 
 
 const routes = [
@@ -19,11 +21,14 @@ const routes = [
   { path: '/login', component: Home },
   { path: '/history', component: History },
   { path: '/logout', component: Logout },
-  { path: '/details', component: Details },
-  { path: '/details/:id', component: details },
-  {path: '/forgot-password',component: ForgotPassword},
+  { path: '/event-details', component: Details },
+  { path: '/event-details/:id', component: details },
   {path: '/reservation',component: Reservation},
-  {path: '/user',component: User}
+  {path: '/reservation/:id',component: reservation},
+  {path: '/history',component: history},
+  {path: '/history/:id',component: history},
+  {path: '/user',component: User},
+  {path: '/user/:id',component: user},
 ];
 
 const router = createRouter({
@@ -31,5 +36,8 @@ const router = createRouter({
   routes,
 });
 
+
 export default router;
+
+
 

@@ -38,6 +38,7 @@
 </template>
 
 <script setup>
+import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 

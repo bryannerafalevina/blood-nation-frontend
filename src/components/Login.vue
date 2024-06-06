@@ -8,16 +8,13 @@
       <div class="card-body" style="display: flex; flex-direction: column; flex-grow: 1;">
         <form @submit.prevent="login">
           <div class="mb-3">
-            <label for="email" class="form-label costum-login2">Email address</label> <br>
+            <label for="email" class="costum-login2">Email address</label> <br>
             <input type="email" class="form-control" id="email" v-model="email" placeholder="Enter your email address" required>
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label costum-login2">Password</label> <br>
+            <label for="password" class="costum-login2"><b>Password</b></label> <br>
             <input type="password" class="form-control" id="password" v-model="password" placeholder="Enter your password" required>
           </div>
-          <p class="mt-3 text-center costum-login3">
-            Forgot your password? <router-link to="/forgot-password"><span style="color: red;">Reset it here</span></router-link>
-          </p>
           <button type="submit" class="btn btn-danger btn-block" style="width: 80px; height: 40px" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
         </form>
         <div v-if="loginError" class="alert alert-danger mt-3" role="alert">
@@ -37,6 +34,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useCounterStore } from '@/store/counter'; // Import store
 
 const email = ref('');
 const password = ref('');
@@ -45,27 +43,27 @@ const loginError = ref('');
 const loginMessage = ref('');
 const router = useRouter();
 
+const counterStore = useCounterStore(); // Buat instance store
+
 const login = async () => {
   isLoggingIn.value = true;
+  loginError.value = ''; // Reset error message
+  loginMessage.value = ''; // Reset success message
+
   try {
-    const response = await fetch('http://localhost:3000/users/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email.value, password: password.value }),
-    });
+    const responsedata = await counterStore.loginUser({ email: email.value, password: password.value }); // Panggil loginUser dari store
+    console.log(responsedata);
+    const token = counterStore.token;
+    console.log('Token:', token);
+    localStorage.setItem('token', token);
+    localStorage.setItem('userID', counterStore.user_id);
+    console.log(counterStore.user_id,"==-");
 
-    if (!response.ok) {
-      throw new Error('Login failed. Please try again.');
-    }
-
-    const data = await response.json();
-    loginMessage.value = data.message; // Assuming the server responds with a message field
-    router.push('/login'); // Redirect to history page after successful login
+    loginMessage.value = 'Login successful!';
+    router.push('/login'); 
   } catch (error) {
     console.error('Login error:', error);
-    loginError.value = 'Invalid email or password. Please try again.';
+    loginError.value = error.message || 'Invalid email or password. Please try again.';
   } finally {
     isLoggingIn.value = false;
   }
@@ -98,6 +96,7 @@ const login = async () => {
   background-color: #0056b3;
   border-color: #0056b3;
 }
+
 #email {
   width: 270px;
   height: 30px;
@@ -112,15 +111,11 @@ const login = async () => {
 
 .costum-login1 {
   font-size: 27px;
+  font-weight: bolder;
 }
 
 .costum-login2 {
   font-size: 18px;
   color: red;
-  font-weight: bolder;
-}
-
-.costum-login3 {
-  font-size: 17px;
 }
 </style>
