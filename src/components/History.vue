@@ -1,4 +1,3 @@
-
 <template>
   <div class="history">
     <h1>Reservation History</h1>
@@ -17,61 +16,54 @@
   </div>
 </template>
 
-<script>
-import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
-export default {
-  name: 'History',
-  data() {
-    return {
-      reservations: []
-    };
-  },
-  mounted() {
-    const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userID');
-    this.fetchReservations(userId, token);
-  },
-  methods: {
-    fetchReservations(userId, token) {
-      fetch(`http://localhost:3000/reservations/user/${userId}`, {
-        headers: {
-          'token': token,
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.reservations = data.map(reservation => {
-          return {
-            id: reservation.id,
-            created_at: reservation.created_at,
-            age: reservation.age,
-            address: reservation.address,
-            weight: reservation.weight
-          };
-        });
-        console.log('Fetched reservations:', this.reservations);
-      })
-      .catch(error => {
-        console.error('Error fetching reservations:', error);
-      });
-    },
-    formatDate(date) {
-      try {
-        const parsedDate = new Date(date);
-        if (isNaN(parsedDate)) {
-          console.error('Invalid Date:', date);
-          return 'Invalid Date';
-        }
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return parsedDate.toLocaleDateString(undefined, options);
-      } catch (error) {
-        console.error('Error formatting date:', error);
-        return 'Invalid Date';
+<script setup>
+import { ref, onMounted } from 'vue'; // Import ref dan onMounted dari Vue 3
+import { useCounterStore } from '@/store/counter'; // Sesuaikan path sesuai dengan struktur proyek Anda
+
+const reservations = ref([]); // Deklarasikan reservations sebagai ref
+
+const fetchReservations = async (userId, token) => {
+  try {
+    const response = await fetch(`http://localhost:3000/reservations/user/${userId}`, {
+      headers: {
+        'token': token,
+        'Content-Type': 'application/json'
       }
-    }
+    });
+    const data = await response.json();
+    reservations.value = data.map(reservation => ({
+      id: reservation.id,
+      created_at: reservation.created_at,
+      age: reservation.age,
+      address: reservation.address,
+      weight: reservation.weight
+    }));
+    console.log('Fetched reservations:', reservations.value);
+  } catch (error) {
+    console.error('Error fetching reservations:', error);
   }
 };
+
+const formatDate = (date) => {
+  try {
+    const parsedDate = new Date(date);
+    if (isNaN(parsedDate)) {
+      console.error('Invalid Date:', date);
+      return 'Invalid Date';
+    }
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return parsedDate.toLocaleDateString(undefined, options);
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Invalid Date';
+  }
+};
+
+onMounted(() => {
+  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('userID');
+  fetchReservations(userId, token);
+});
 </script>
 
 <style scoped>
