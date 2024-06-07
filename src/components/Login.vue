@@ -60,7 +60,7 @@ const login = async () => {
     console.log(counterStore.user_id,"==-");
 
     loginMessage.value = 'Login successful!';
-    router.push('/login'); 
+    router.push('/'); 
   } catch (error) {
     console.error('Login error:', error);
     loginError.value = error.message || 'Invalid email or password. Please try again.';

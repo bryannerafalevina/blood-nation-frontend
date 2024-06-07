@@ -8,36 +8,28 @@ import Details from '../views/Details.vue';
 import Reservation from '../views/Reservation.vue';
 import User from '../views/User.vue';
 
-
 const details = () => import("../views/Details.vue")
 const reservation = () => import("../views/Reservation.vue")
-const history = () => import("../views/History.vue")
-const user = () => import("../views/User.vue")
-
-
-const routes = [
-  { path: '/', component: Login },
-  { path: '/regist', component: Regist },
-  { path: '/login', component: Home },
-  { path: '/history', component: History },
-  { path: '/logout', component: Logout },
-  { path: '/event-details', component: Details },
-  { path: '/event-details/:id', component: details },
-  {path: '/reservation',component: Reservation},
-  {path: '/reservation/:id',component: reservation},
-  {path: '/history',component: history},
-  {path: '/history/:id',component: history},
-  {path: '/user',component: User},
-  {path: '/user/:id',component: user},
-];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    { path: '/', name: 'home', component: Home },
+    { path: '/regist', name: 'regist', component: Regist },
+    { path: '/login', name: 'login', component: Login },
+    { path: '/history', name: 'history', component: History },
+    { path: '/logout', name: 'logout', component: Logout },
+    { path: '/event-details', name: 'event-details', component: Details },
+    { path: '/event-details/:id', name: 'event-details-id', component: details },
+    { path: '/reservation', name: 'reservation', component: Reservation },
+    { path: '/reservation/:id', name: 'reservation-id', component: reservation },
+    { path: '/user', name: 'user', component: User },
+    { path: '/user/:id', name: 'user-id', component: User },
+  ]
 });
 
-
-export default router;
-
-
-
+router.beforeEach((to, from, next) => {
+  if ((to.name == 'login' || to.name == 'regist') && localStorage.token) next({ name: 'home'})
+  else next()
+})
+ export default router 

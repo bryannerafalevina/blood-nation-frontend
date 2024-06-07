@@ -1,5 +1,5 @@
-
 <template>
+  <!-- <p>{{ bloodnations }}</p> -->
   <div class="search-container-md">
     <select v-model="searchType" style="margin-top: 100px; margin-left: 80px; width: 200px; height: 30px; margin-right: 10px; border-radius: 5px;">
       <option value="name">Name</option>
@@ -8,14 +8,13 @@
       <option value="date">Date</option>
     </select>
     <input type="text" v-model="searchQuery" :placeholder="'Search by ' + searchType" style="margin-top: 20px; width: 400px; height: 30px; margin-right: 10px; border-radius: 5px;">
-    <button @click="search" style="height: 30px; width: 60px; margin-top: 20px;">Submit</button>
+    <button @click="search(searchQuery)" style="height: 30px; width: 60px; margin-top: 20px;">Submit</button>
 
-    <div v-if="isSubmitted" class="card-container-home">
+    <!-- <div v-if="isSubmitted" class="card-container-home"> -->
+      <!-- <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card"> -->
       <div v-for="(bloodnation, index) in paginatedBloodnations" :key="index" class="card">
         <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" />
         <div class="card-content">
-          <!-- <h3><b>{{ bloodnation.name }}</b></h3>
-          <p>{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p> -->
           <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
         <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
           <p class="quota">Quota: {{ bloodnation.quota }} people</p>
@@ -23,17 +22,15 @@
           <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
-    <div v-else>
-      <p v-if="!filteredBloodnations.length">No search results.</p>
+    <!-- <div v-else> -->
+      <p v-if="!filteredBloodnations.length"></p>
       <div v-else class="card-container-home">
+        <!-- <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card"> -->
         <div v-for="(bloodnation, index) in paginatedBloodnations" :key="index" class="card">
           <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" />
           <div class="card-content">
-            <!-- <h3><b>{{ bloodnation.name }}</b></h3>
-            <p>{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p> -->
-
             <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
         <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
             <p class="quota">Quota: {{ bloodnation.quota }} people</p>
@@ -54,90 +51,91 @@
         </li>
       </ul>
     </nav>
-
-
-
-  </div>
+  <!-- </div> -->
 </template>
-
 <script setup>
-import { fetchBloodnations } from '@/store/counter'; // Import fetchBloodnations from store counter.js
+import { ref, computed, onMounted } from 'vue';
+import { useCounterStore } from '@/store/counter';
+import { useRouter } from 'vue-router';
+const router = useRouter('');
 
+const counterStore = useCounterStore();
+const originalBloodnations = ref([]); // Menyimpan data asli
 const bloodnations = ref([]);
 const searchQuery = ref('');
-const searchType = ref('name');
-const isSubmitted = ref(false);
+const searchType = ref('');
 const filteredBloodnations = ref([]);
 const currentPage = ref(1);
-const itemsPerPage = ref(5);
+const itemsPerPage = ref(2);
 
 const paginatedBloodnations = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
-  return filteredBloodnations.value.slice(start, end);
+  return bloodnations.value.slice(start, end);
 });
 
 const totalPages = computed(() => {
-  return Math.ceil(filteredBloodnations.value.length / itemsPerPage.value);
+  return Math.ceil(bloodnations.value.length / itemsPerPage.value);
 });
 
-onMounted(async () => {
-  await fetchBloodnations();
-});
-
-async function fetchBloodnations() {
+const fetchBloodnations = async () => {
   try {
-    const data = await fetchBloodnations();
-    bloodnations.value = data;
-    filteredBloodnations.value = data;
-    console.log(filteredBloodnations.value);
+    await counterStore.fetchBloodnations();
+    originalBloodnations.value = counterStore.bloodnations; // Simpan data asli
+    bloodnations.value = counterStore.bloodnations;
+    filteredBloodnations.value = counterStore.filteredBloodnations;
   } catch (error) {
     console.error('Error fetching bloodnations:', error);
   }
-}
+};
 
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
-}
 
-function prevPage() {
+
+const search = (searchQuery) => {
+  const query = searchQuery.toLowerCase().trim();
+  bloodnations.value = originalBloodnations.value.filter(bloodnation => {
+    if (searchType.value === 'name') {
+      const lowerCaseName = bloodnation.name.toLowerCase();
+      return lowerCaseName.includes(query);
+    } else if (searchType.value === 'location') {
+      const lowerCaseLocation = bloodnation.location.toLowerCase();
+      return lowerCaseLocation.includes(query);
+    } else if (searchType.value === 'quota') {
+      const quotaString = bloodnation.quota.toString();
+      return quotaString.includes(query);
+    } else if (searchType.value === 'date') {
+      const formattedDate = formatDate(bloodnation.date);
+      return formattedDate.includes(query);
+    }
+    return false;
+  });
+};
+
+
+const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--;
   }
-}
+};
 
-function nextPage() {
+const nextPage = () => {
   if (currentPage.value < totalPages.value) {
     currentPage.value++;
   }
-}
+};
 
-function search() {
-  isSubmitted.value = true;
-  if (!searchQuery.value.trim()) {
-    filteredBloodnations.value = bloodnations.value;
-  } else {
-    filteredBloodnations.value = bloodnations.value.filter(bloodnation => {
-      const query = searchQuery.value.toLowerCase();
-      if (searchType.value === 'name') {
-        return bloodnation.name.toLowerCase().includes(query);
-      } else if (searchType.value === 'location') {
-        return bloodnation.location.toLowerCase().includes(query);
-      } else if (searchType.value === 'quota') {
-        return bloodnation.quota.toString().includes(query);
-      } else if (searchType.value === 'date') {
-        return formatDate(bloodnation.date) === query;
-      }
-      return false;
-    });
-  }
-  currentPage.value = 1;
-}
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
+};
+
+onMounted(fetchBloodnations);
+
 </script>
 
-<style>
-/* Add your existing styles here */
+
+
+<style> 
 
 .card-container-home {
 display: grid;
@@ -214,7 +212,6 @@ display: contents;
 margin-top: 200px;
 }
 
-/* Pagination Styles */
 
 .pagination {
 display: flex;
@@ -253,7 +250,7 @@ color: #ccc;
 cursor: not-allowed;
 }
 .name-style b {
-margin-right: 0; /* Menghapus margin antara nama dan tanggal */
+margin-right: 0; 
 }
 
 </style>

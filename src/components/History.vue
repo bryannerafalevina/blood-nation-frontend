@@ -19,25 +19,17 @@
 <script setup>
 import { ref, onMounted } from 'vue'; // Import ref dan onMounted dari Vue 3
 import { useCounterStore } from '@/store/counter'; // Sesuaikan path sesuai dengan struktur proyek Anda
+import { useRouter } from 'vue-router';
+const router = useRouter('');
 
+const counterStore = useCounterStore();
 const reservations = ref([]); // Deklarasikan reservations sebagai ref
 
-const fetchReservations = async (userId, token) => {
+const fetchReservations = async () => {
   try {
-    const response = await fetch(`http://localhost:3000/reservations/user/${userId}`, {
-      headers: {
-        'token': token,
-        'Content-Type': 'application/json'
-      }
-    });
-    const data = await response.json();
-    reservations.value = data.map(reservation => ({
-      id: reservation.id,
-      created_at: reservation.created_at,
-      age: reservation.age,
-      address: reservation.address,
-      weight: reservation.weight
-    }));
+    const userId = localStorage.getItem('userID');
+    await counterStore.fetchReservations(userId);
+    reservations.value = counterStore.reservations;
     console.log('Fetched reservations:', reservations.value);
   } catch (error) {
     console.error('Error fetching reservations:', error);
@@ -58,6 +50,15 @@ const formatDate = (date) => {
     return 'Invalid Date';
   }
 };
+// const deleteReservation = async (reservationId) => {
+//   try {
+//     await counterStore.deleteReservation(reservationId);
+//     reservations.value = reservations.value.filter(reservation => reservation.id !== reservationId);
+//     console.log('Deleted reservation with ID:', reservationId);
+//   } catch (error) {
+//     console.error('Error deleting reservation:', error);
+//   }
+// };
 
 onMounted(() => {
   const token = localStorage.getItem('token');

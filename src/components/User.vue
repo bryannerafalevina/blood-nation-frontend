@@ -156,9 +156,7 @@ h1 {
         <div class="profile-info">
           <p><strong>Username:</strong> {{ userData.username }}</p>
           <p><strong>Email:</strong> {{ userData.email }}</p>
-          <p><strong>Phone Number:</strong> {{ userData.phoneNumber }}</p>
-          <p><strong>Token:</strong> {{ token }}</p>
-          <p><strong>User ID:</strong> {{ userId }}</p>
+          <p><strong>Phone Number:</strong> {{ userData.phone_number }}</p>
         </div>
       </div>
     </div>
@@ -171,22 +169,17 @@ import { useRouter } from 'vue-router';
 import { useCounterStore } from '@/store/counter';
 
 const counterStore = useCounterStore();
-const userData = ref('');
+const userData = ref ({});
 const token = ref('');
 const userId = ref('');
 const router = useRouter('');
 
-onMounted(async () => {
-  // Call fetchUserData method to fetch user data
-  await counterStore.fetchUserData(counterStore.user_id);
 
-  // Access user data, token, and userId directly from the Vuex store
-  userData.value = counterStore.userData;
-  token.value = counterStore.token;
-  userId.value = counterStore.user_id;
-  console.log(counterStore.userData);
-  console.log(counterStore.token);
-  console.log(counterStore.user_id);
+
+onMounted(async () => { 
+  await counterStore.fetchUserData() 
+  console.log(counterStore.user,"--user---");
+  userData.value = counterStore.user
 });
 </script>
 

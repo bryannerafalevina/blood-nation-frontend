@@ -20,8 +20,8 @@
             <input type="password" class="form-control2" id="password" v-model="password" placeholder="Enter a password" required style="width: 570px;">
           </div>
           <div class="mb-3">
-            <label for="phone" class="form-label costum-regist2">Phone Number</label>
-            <input type="text" class="form-control2" id="phone" v-model="phone" placeholder="Enter your phone number" required inputmode="numeric">
+            <label for="phoneNumber" class="form-label costum-regist2">Phone Number</label>
+            <input type="text" class="form-control2" id="phoneNumber" v-model="phoneNumber" placeholder="Enter your phone number" required inputmode="numeric">
           </div>
           <button type="submit" class="btn btn-danger btn-block" :disabled="isSubmitting">{{ isSubmitting ? 'Registering...' : 'Register' }}</button>
         </form>
@@ -37,52 +37,35 @@
   </div>
 </template>
 
+
 <script setup>
 import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const counterStore = useCounterStore();
 
 const username = ref('');
 const email = ref('');
 const password = ref('');
-const isSubmitting = ref(false);
-const isRegistered = ref(false);
-const phone = ref('');
+const phoneNumber = ref('');
 
 const register = async () => {
-  isSubmitting.value = true;
   try {
-    console.log(phone.value);
-    const response = await fetch('http://localhost:3000/users/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username: username.value, email: email.value, password: password.value, phoneNumber: phone.value }),
-    });
-
-    if (!response.ok) {
-      throw new Error('Registration failed. Please try again.');
-    }
-
-    // Registration successful
-    isRegistered.value = true;
-    setTimeout(() => {
-      router.push('/'); // Redirecting to login page after 2 seconds
-    }, 2000);
-
+    await counterStore.registerUser({ username: username.value, email: email.value, password: password.value, phoneNumber: phoneNumber.value });
+    router.push('/login'); // Replace '/success' with the route you want to redirect to
+    username.value = ''
+    email.value = ''
+    password.value = ''
+    phoneNumber.value = ''
   } catch (error) {
     console.error('Registration error:', error);
-
     alert('Registration failed. Please try again.');
-  } finally {
-    isSubmitting.value = false;
   }
 };
-
 </script>
+
 
 
 <style>

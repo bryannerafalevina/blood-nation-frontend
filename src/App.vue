@@ -37,7 +37,7 @@ export default {
     checkAuth() {
   const user_id = localStorage.getItem('userID');
   const token = localStorage.getItem('token');
-  console.log('Checking auth with userId:', user_id, 'and token:', token); // Debug log
+  // console.log('Checking auth with userId:', user_id, 'and token:', token); // Debug log
   if (user_id && token) {
     fetch(`http://localhost:3000/users/${user_id}`, {
       headers: {
@@ -55,7 +55,8 @@ export default {
       this.user = data;
       this.isAuthenticated = true;
       this.showHeader = true; // Show header after successful authentication
-      console.log('User data fetched successfully:', data); // Debug log
+      // console.log('User data fetched successfully:', data); 
+      // Debug log
     })
     .catch(error => {
       console.error('Error fetching user data:', error);
