@@ -36,12 +36,10 @@
     </div>
   </div>
 </template>
-
-
 <script setup>
-import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
 
 const router = useRouter();
 const counterStore = useCounterStore();
@@ -51,23 +49,34 @@ const email = ref('');
 const password = ref('');
 const phoneNumber = ref('');
 
+const isSubmitting = ref(false);
+const isRegistered = ref(false);
+
 const register = async () => {
+  isSubmitting.value = true;
   try {
-    await counterStore.registerUser({ username: username.value, email: email.value, password: password.value, phoneNumber: phoneNumber.value });
-    router.push('/login'); // Replace '/success' with the route you want to redirect to
-    username.value = ''
-    email.value = ''
-    password.value = ''
-    phoneNumber.value = ''
+    await counterStore.registerUser({ 
+      username: username.value, 
+      email: email.value, 
+      password: password.value, 
+      phoneNumber: phoneNumber.value 
+    });
+    isRegistered.value = true;
+    setTimeout(() => {
+      router.push('/login'); // Redirect to login page after registration
+    }, 2000); // Wait for 2 seconds before redirecting
+    username.value = '';
+    email.value = '';
+    password.value = '';
+    phoneNumber.value = '';
   } catch (error) {
     console.error('Registration error:', error);
     alert('Registration failed. Please try again.');
+  } finally {
+    isSubmitting.value = false;
   }
 };
 </script>
-
-
-
 <style>
 .card {
   border-radius: 5px;
@@ -95,7 +104,7 @@ const register = async () => {
   border-radius: 5px 5px 0 0;
 }
 
-.card-body2{
+.card-body2 {
   margin-right: 5px;
 }
 
@@ -119,26 +128,22 @@ const register = async () => {
 
 .form-control2 {
   display: block;
-  width: 570px; /* Set the width to 500px to match the length of the other input fields */
+  width: 570px; /* Set the width to match the length of the other input fields */
   margin-top: 5px; /* Add some space between label and input */
   border-radius: 5px;
   height: 30px;
-  
 }
 
-
-.costum-regist1{
+.costum-regist1 {
   font-size: 27px;
 }
 
-.costum-regist2{
+.costum-regist2 {
   font-size: 18px;
   margin-right: 20px;
 }
 
-.costum-regist3{
+.costum-regist3 {
   font-size: 17px;
 }
-
-
 </style>

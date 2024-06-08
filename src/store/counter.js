@@ -28,7 +28,7 @@ export const useCounterStore = defineStore('counter', {
           },
         });
         let data = await response.json();
-        // console.log(data, 'tess');
+        console.log(data, 'tess');
         this.bloodnations = data; // Memperbarui state langsung dari store
         // counterStore.filteredBloodnations = data; // Memperbarui state langsung dari store
         // console.log(counterStore.filteredBloodnations);

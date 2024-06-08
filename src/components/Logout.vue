@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <div v-if="!loggedOut" class="container-fluid d-flex justify-content-center align-items-center">
@@ -19,18 +18,24 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { useCounterStore } from '@/store/counter'; // Import store
+import { useAuthStore } from '@/store/auth'; // Import the correct store
+// import { isAuthenticated } from '@/store/auth'; // Import isAuthenticated function
 
-
-const store = useCounterStore(); // Access the Pinia store
+const authStore = useAuthStore(); // Use the auth store
 
 const loggedOut = ref(false);
 const router = useRouter();
 
+onMounted(() => {
+  if (!isAuthenticated()) {
+    router.push('/login');
+  }
+});
+
 const logout = () => {
-  localStorage.clear(); // Clear user session
+  authStore.removeToken(); // Clear user session
   loggedOut.value = true;
   router.push('/login'); // Redirect to login page
 };
