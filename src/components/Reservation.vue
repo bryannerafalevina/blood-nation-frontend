@@ -9,15 +9,15 @@
             <form @submit.prevent="submitForm" class="reservation-form">
               <div class="form-group">
                 <label for="address" class="form-label">Address:</label>
-                <input type="text" id="address" v-model="formData.address" class="form-control" placeholder="Enter your address" required>
+                <input type="text" id="address" v-model="formData.address" class="form-control3" placeholder="Enter your address" required>
               </div>
               <div class="form-group">
                 <label for="age" class="form-label">Age:</label>
-                <input type="number" id="age" v-model="formData.age" class="form-control" placeholder="Enter your age" required>
+                <input type="number" id="age" v-model="formData.age" class="form-control3" placeholder="Enter your age" required>
               </div>
               <div class="form-group">
                 <label for="weight" class="form-label">Weight:</label>
-                <input type="number" id="weight" v-model="formData.weight" class="form-control" placeholder="Enter your weight" required>
+                <input type="number" id="weight" v-model="formData.weight" class="form-control3" placeholder="Enter your weight" required>
               </div>
               <div class="form-group">
                 <label for="bloodtype" class="form-label">Bloodtype:</label>
@@ -156,7 +156,7 @@ const submitForm = async () => {
   margin-bottom: 5px;
 }
 
-.form-control {
+.form-control3 {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 3px;

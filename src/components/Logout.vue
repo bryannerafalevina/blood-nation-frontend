@@ -2,7 +2,7 @@
 <template>
   <div>
     <div v-if="!loggedOut" class="container-fluid d-flex justify-content-center align-items-center">
-      <div class="card mt-5" style="width: 500px; margin-left: 350px;">
+      <div class="card mt-5" style="width: 500px; margin-top: 350px;">
         <div class="card-header-logout bg-primary text-white">
           <h4 class="card-title">Logout</h4>
         </div>

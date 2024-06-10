@@ -39,7 +39,7 @@ export default {
   const token = localStorage.getItem('token');
   // console.log('Checking auth with userId:', user_id, 'and token:', token); // Debug log
   if (user_id && token) {
-    fetch(`http://localhost:3000/users/${user_id}`, {
+    fetch(`http://3.27.136.219/users/${user_id}`, {
       headers: {
         'token': token,
         'Content-Type': 'application/json'
