@@ -1,15 +1,15 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center">
-    <div class="card mt-5 custom-card">
+    <div class="card-details mt-5 custom-card">
       <div class="card-header custom-header">
-        <h4 class="card-title">Event Details</h4>
+        <h4 class="card-title custom-title">Event Details</h4>
       </div>
       <div class="card-body">
         <p>Activity Location: {{ event.location }}</p>
         <p>Requirements: {{ event.requirements }}</p>
         <p>Date: {{ event.date }}</p>
         <p>Quota: {{ event.quota }}</p>
-        <button v-if="isAuthorized" class="btn btn-primary" @click="goToDetail">Apply</button>
+        <button v-if="isAuthorized" class="btn-details btn-primary" @click="goToDetail">Apply</button>
         <p v-else class="text-muted"><router-link :to="'/reservation/' + event.id" class="details-link">Apply</router-link></p>
       </div>
     </div>
@@ -58,14 +58,9 @@ onMounted(() => {
 </script>
 
 <style>
-
 .container {
   display: flex;
   justify-content: center;
-}
-.card {
-  margin-top: 100px;
-  border-radius: 15px;
 }
 
 .custom-card {
@@ -74,6 +69,33 @@ onMounted(() => {
 }
 
 .custom-header {
+  color: white;
+}
+
+.custom-title {
+  color: black; /* Warna teks judul diubah menjadi hitam */
+}
+
+.card-details {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  padding: 20px;
+  border: 2px solid red;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.card-body p {
+  margin: 10px 0;
+}
+
+.card-title {
+  font-size: 1.5rem;
+}
+
+.btn-details {
+  margin-top: 20px;
+  background-color: red;
   color: white;
 }
 </style>

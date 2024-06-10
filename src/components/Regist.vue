@@ -1,25 +1,25 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center">
     <div class="card-register p-4">
-      <img src="../assets/register.png" alt="Blood Nation Logo" style="width: 300px;">
+      <img src="../assets/register.png" alt="Blood Nation Logo" style="width: 200px;">
       <div class="card-header bg-danger text-white text-center">
         <h4 class="card-title costum-regist1">Register for a Blood Nation Account</h4>
       </div>
       <div class="card-body">
         <form @submit.prevent="register" v-if="!isRegistered">
-          <div class="mb-3">
+          <div class="mb-3 custom-form-group">
             <label for="username" class="form-label costum-regist2">Username</label>
             <input type="text" class="form-control2" id="username" v-model="username" placeholder="Enter your username" required>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 custom-form-group">
             <label for="email" class="form-label costum-regist2">Email address</label>
             <input type="email" class="form-control2" id="email" v-model="email" placeholder="Enter your email address" required>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 custom-form-group">
             <label for="password" class="form-label costum-regist2">Password</label>
             <input type="password" class="form-control2" id="password" v-model="password" placeholder="Enter a password" required>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 custom-form-group">
             <label for="phoneNumber" class="form-label costum-regist2">Phone Number</label>
             <input type="text" class="form-control2" id="phoneNumber" v-model="phoneNumber" placeholder="Enter your phone number" required inputmode="numeric">
           </div>
@@ -73,9 +73,7 @@ const register = async () => {
 };
 </script>
 
-
-
-<style>
+<style scoped>
 .card-register {
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -105,7 +103,7 @@ const register = async () => {
   border-radius: 5px 5px 0 0;
 }
 
-.card-body2{
+.card-body2 {
   margin-right: 5px;
 }
 
@@ -129,26 +127,26 @@ const register = async () => {
 
 .form-control2 {
   display: block;
-  width: 570px; /* Set the width to 500px to match the length of the other input fields */
+  width: 570px; /* Set the width to 570px to match the length of the other input fields */
   margin-top: 5px; /* Add some space between label and input */
   border-radius: 5px;
   height: 30px;
-  
 }
 
+.custom-form-group {
+  margin-bottom: 20px; /* Add space between form elements */
+}
 
-.costum-regist1{
+.costum-regist1 {
   font-size: 27px;
 }
 
-.costum-regist2{
+.costum-regist2 {
   font-size: 18px;
   margin-right: 20px;
 }
 
-.costum-regist3{
+.costum-regist3 {
   font-size: 17px;
 }
-
-
 </style>

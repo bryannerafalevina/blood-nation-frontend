@@ -1,14 +1,18 @@
-
 <template>
   <div id="app">
     <header v-if="showHeader">
-      <img src="@/assets/logo.png" alt="BloodNation Logo" style="height: 40px; margin-right: 10px;">
+      <router-link to="/">
+        <img src="@/assets/logo.png" alt="BloodNation Logo" style="height: 40px; margin-right: 10px;">
+      </router-link>
       <div class="container">
-        <div class="icon-link" style="color: white;">
-          <router-link to="/user" class="welcome-text" style="color: black; text-decoration: none;">
+        <div class="icon-link" style="color: white; display: flex; align-items: center;">
+          <router-link to="/user" class="welcome-text" style="color: black; text-decoration: none; margin-right: 50px;">
             Welcome, {{ user.username }}
           </router-link>
-          <button class="btn btn-link logout-btn" @click="logout" style="color: black;">
+          <router-link to="/history" style="color: black; text-decoration: none; margin-right: 40px;">
+            History
+          </router-link>
+          <button class="btn btn-link logout-btn" @click="logout" style="color: black; margin-right: 30px; margin-bottom: 10px;">
             <i class="bi bi-box-arrow-right"></i> Logout
           </button>
         </div>
@@ -18,7 +22,11 @@
   </div>
 </template>
 
+
+
 <script>
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 export default {
   data() {
     return {
@@ -37,7 +45,6 @@ export default {
     checkAuth() {
   const user_id = localStorage.getItem('userID');
   const token = localStorage.getItem('token');
-  // console.log('Checking auth with userId:', user_id, 'and token:', token); // Debug log
   if (user_id && token) {
     fetch(`http://3.27.136.219/users/${user_id}`, {
       headers: {
@@ -54,9 +61,7 @@ export default {
     .then(data => {
       this.user = data;
       this.isAuthenticated = true;
-      this.showHeader = true; // Show header after successful authentication
-      // console.log('User data fetched successfully:', data); 
-      // Debug log
+      this.showHeader = true; 
     })
     .catch(error => {
       console.error('Error fetching user data:', error);
@@ -85,6 +90,9 @@ export default {
 @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css');
 
 
+.router-link-exact-active {
+  text-decoration: none;
+}
 
 header {
   background-color: rgba(206, 139, 145, 0.9);

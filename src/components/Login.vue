@@ -1,21 +1,21 @@
 <template>
-  <div class="container-fluid d-flex justify-content-center align-items-center" style="display: flex; justify-content: center; align-items: center; margin-left: 300px;">
-    <div class="card p-4" style="width: 500px; background-color: #f8f9fa; border: 2px solid #dc3545; border-radius: 15px;">
-      <img src="../assets/login.png" alt="Blood Nation Logo" style="width: 300px;">
-      <div class="card-header bg-primary text-white text-center" style="border-radius: 15px 15px 0 0;">
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card p-4 custom-card mx-auto">
+      <img src="../assets/login.png" alt="Blood Nation Logo" class="custom-img">
+      <div class="card-header bg-primary text-white text-center custom-header">
         <h4 class="card-title costum-login1">Login to Blood Nation</h4>
       </div>
-      <div class="card-body" style="display: flex; flex-direction: column; flex-grow: 1;">
+      <div class="card-body custom-body">
         <form @submit.prevent="login">
-          <div class="mb-3">
+          <div class="mb-3 custom-form-group">
             <label for="email" class="costum-login2">Email address</label> <br>
-            <input type="email" class="form-control" id="email" v-model="email" placeholder="Enter your email address" required>
+            <input type="email" class="form-control custom-input" id="email" v-model="email" placeholder="Enter your email address" required>
           </div>
-          <div class="mb-3">
+          <div class="mb-3 custom-form-group">
             <label for="password" class="costum-login2">Password</label> <br>
-            <input type="password" class="form-control" id="password" v-model="password" placeholder="Enter your password" required>
+            <input type="password" class="form-control custom-input" id="password" v-model="password" placeholder="Enter your password" required>
           </div>
-          <button type="submit" class="btn btn-danger btn-block" style="width: 80px; height: 40px" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
+          <button type="submit" class="btn-login btn-danger btn-block custom-button-login" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
         </form>
         <div v-if="loginError" class="alert alert-danger mt-3" role="alert">
           {{ loginError }}
@@ -24,7 +24,7 @@
           {{ loginMessage }}
         </div>
       </div>
-      <div class="card-footer bg-light text-muted text-center" style="border-radius: 0 0 15px 15px;">
+      <div class="card-footer bg-light text-muted text-center custom-footer">
         <p class="mt-3 text-center costum-login3">Don't have an account? <router-link to="/regist"> <span style="color: red;">Regist</span></router-link></p>
       </div>
     </div>
@@ -57,7 +57,7 @@ const login = async () => {
     console.log('Token:', token);
     localStorage.setItem('token', token);
     localStorage.setItem('userID', counterStore.user_id);
-    console.log(counterStore.user_id,"==-");
+    console.log(counterStore.user_id, "==-");
 
     loginMessage.value = 'Login successful!';
     router.push('/'); 
@@ -69,43 +69,64 @@ const login = async () => {
   }
 };
 </script>
-<style>
-.card {
+
+<style scoped>
+.container-fluid {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh; /* Full height to center vertically */
+  background-color: white; /* Mengubah background menjadi putih */
 }
 
-.card-header {
+.custom-card {
+  width: 800px;
+  background-color: white; /* Mengubah warna background card menjadi putih */
+  border: 2px solid #dc3545;
+  border-radius: 15px;
+}
+
+.custom-img {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.custom-header {
   border-radius: 15px 15px 0 0;
-  color: red; /* Red text */
 }
 
-.card-footer {
-  border-radius: 0 0 15px 15px;
+.custom-body {
+  display: flex;
+  flex-direction: column;
 }
 
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+.custom-form-group {
+  margin-bottom: 20px; /* Mengatur jarak antara elemen form */
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-
-.form-control {
-  width: 270px;
-  height: 30px;
+.custom-input {
+  width: 100%;
+  padding: 8px;
   border-radius: 5px;
 }
 
+.custom-button-login {
+  width: 80px; /* Lebar tombol menjadi lebih lebar ke arah kanan */
+  height: 40px;
+  background-color: #dc3545;
+}
+
+.custom-footer {
+  border-radius: 0 0 15px 15px;
+}
 
 .costum-login2 {
   font-size: 18px;
   color: black;
+}
 
+.costum-login1 {
+  font-size: 24px; /* Ubah ukuran teks sesuai kebutuhan */
+  color: black; /* Ubah warna teks menjadi hitam */
 }
 </style>

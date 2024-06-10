@@ -132,6 +132,7 @@ onMounted(fetchBloodnations);
   gap: 20px;
   margin-left: 70px;
   justify-content: flex-start;
+  margin-bottom: 20px; /* Tambahkan margin-bottom di sini */
 }
 
 .card {
@@ -143,6 +144,7 @@ onMounted(fetchBloodnations);
   border-radius: 10px;
   max-width: 300px;
   margin: 20px auto; /* Pusatkan card */
+  border: 2px solid red;
 }
 
 
@@ -265,4 +267,6 @@ button {
   width: 60px;
   margin-top: 20px;
 }
+
+
 </style>

@@ -114,13 +114,13 @@ const submitForm = async () => {
 <style scoped>
 .reservation-container { 
   align-items: center;
-  margin-left: 250px;
+  margin-left: 500px;
+  padding: 150px;
+  width: 600px;
+  margin-top: 20px;
 }
 
-.card-container {
-  width: 630px;
-  margin-top: 70px;
-}
+
 
 .outer-card {
   padding: 30px;
@@ -141,9 +141,6 @@ const submitForm = async () => {
   color: #dc3545; 
 }
 
-.card-container {
-  padding: 20px;
-}
 
 .form-group {
   display: flex;
