@@ -58,7 +58,6 @@ onMounted(() => {
 </script>
 
 <style>
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css');
 
 .container {
   display: flex;

@@ -1,8 +1,9 @@
+
 <template>
   <div>
     <div v-if="!loggedOut" class="container-fluid d-flex justify-content-center align-items-center">
       <div class="card mt-5" style="width: 500px; margin-left: 350px;">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header-logout bg-primary text-white">
           <h4 class="card-title">Logout</h4>
         </div>
         <div class="card-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -18,24 +19,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/store/auth'; // Import the correct store
-// import { isAuthenticated } from '@/store/auth'; // Import isAuthenticated function
+import { useCounterStore } from '@/store/counter'; // Import store
 
-const authStore = useAuthStore(); // Use the auth store
+
+const store = useCounterStore(); // Access the Pinia store
 
 const loggedOut = ref(false);
 const router = useRouter();
 
-onMounted(() => {
-  if (!isAuthenticated()) {
-    router.push('/login');
-  }
-});
-
 const logout = () => {
-  authStore.removeToken(); // Clear user session
+  localStorage.clear(); // Clear user session
   loggedOut.value = true;
   router.push('/login'); // Redirect to login page
 };
@@ -47,6 +42,13 @@ const cancelLogout = () => {
 
 <style>
 /* Add custom styles for the component here */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Pusatkan konten secara horizontal */
+  margin-top: 50px; /* Berikan margin atas untuk memberikan ruang */
+}
+
 .button-container {
   display: flex;
   justify-content: center;
@@ -60,4 +62,9 @@ const cancelLogout = () => {
 .btn-equal {
   width: 120px; /* Adjust size as needed */
 }
+.card-header-logout{
+  .card-header-logout {
+  text-align: center; /* Pusatkan teks secara horizontal */
+  padding: 20px; /* Berikan padding untuk meningkatkan ruang */
+}};
 </style>

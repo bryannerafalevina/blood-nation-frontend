@@ -32,9 +32,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/store/auth'; // Import the correct store
+import { useCounterStore } from '@/store/counter'; // Import store
 
 const email = ref('');
 const password = ref('');
@@ -43,29 +43,24 @@ const loginError = ref('');
 const loginMessage = ref('');
 const router = useRouter();
 
-const authStore = useAuthStore(); // Use the auth store
+const counterStore = useCounterStore(); // Buat instance store
 
-onMounted(() => {
-  if (authStore.isAuthenticated) {
-    router.push('/home');
-  }
-});
 const login = async () => {
   isLoggingIn.value = true;
   loginError.value = ''; // Reset error message
   loginMessage.value = ''; // Reset success message
 
   try {
-    const responsedata = await authStore.loginUser({ email: email.value, password: password.value }); // Call loginUser from authStore
+    const responsedata = await counterStore.loginUser({ email: email.value, password: password.value }); // Panggil loginUser dari store
     console.log(responsedata);
-    const token = authStore.token;
+    const token = counterStore.token;
     console.log('Token:', token);
     localStorage.setItem('token', token);
-    localStorage.setItem('userID', authStore.user_id);
-    console.log(authStore.user_id,"==-");
+    localStorage.setItem('userID', counterStore.user_id);
+    console.log(counterStore.user_id,"==-");
 
     loginMessage.value = 'Login successful!';
-    router.push('/home'); 
+    router.push('/'); 
   } catch (error) {
     console.error('Login error:', error);
     loginError.value = error.message || 'Invalid email or password. Please try again.';

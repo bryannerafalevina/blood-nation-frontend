@@ -1,22 +1,24 @@
 <template>
   <!-- <p>{{ bloodnations }}</p> -->
   <div class="search-container-md">
-    <select v-model="searchType" style="margin-top: 100px; margin-left: 80px; width: 200px; height: 30px; margin-right: 10px; border-radius: 5px;">
+    <select v-model="searchType" class="search-select">
       <option value="name">Name</option>
       <option value="location">Location</option>
       <option value="quota">Quota</option>
       <option value="date">Date</option>
     </select>
-    <input type="text" v-model="searchQuery" :placeholder="'Search by ' + searchType" style="margin-top: 20px; width: 400px; height: 30px; margin-right: 10px; border-radius: 5px;">
-    <button @click="search(searchQuery)" style="height: 30px; width: 60px; margin-top: 20px;">Submit</button>
+    <input type="text" v-model="searchQuery" :placeholder="'Search by ' + searchType" class="search-input">
+    <button @click="search(searchQuery)" class="search-button">Submit</button>
 
     <!-- <div v-if="isSubmitted" class="card-container-home"> -->
       <!-- <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card"> -->
       <div v-for="(bloodnation, index) in paginatedBloodnations" :key="index" class="card">
-        <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" />
+        <!-- <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" /> -->
+        <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" @error="handleImageError(bloodnation.image_url)" />
+
         <div class="card-content">
           <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
-        <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
+          <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
           <p class="quota">Quota: {{ bloodnation.quota }} people</p>
           <p class="detail">{{ bloodnation.detail }}</p>
           <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
@@ -32,7 +34,7 @@
           <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" />
           <div class="card-content">
             <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
-        <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
+            <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
             <p class="quota">Quota: {{ bloodnation.quota }} people</p>
             <p class="detail">{{ bloodnation.detail }}</p>
             <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
@@ -53,6 +55,7 @@
     </nav>
   <!-- </div> -->
 </template>
+
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useCounterStore } from '@/store/counter';
@@ -67,6 +70,9 @@ const searchType = ref('');
 const filteredBloodnations = ref([]);
 const currentPage = ref(1);
 const itemsPerPage = ref(2);
+const handleImageError = (url) => {
+  console.error(`Image not found at URL: ${url}`);
+};
 
 const paginatedBloodnations = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
@@ -89,8 +95,6 @@ const fetchBloodnations = async () => {
   }
 };
 
-
-
 const search = (searchQuery) => {
   const query = searchQuery.toLowerCase().trim();
   bloodnations.value = originalBloodnations.value.filter(bloodnation => {
@@ -111,7 +115,6 @@ const search = (searchQuery) => {
   });
 };
 
-
 const prevPage = () => {
   if (currentPage.value > 1) {
     currentPage.value--;
@@ -130,127 +133,145 @@ const formatDate = (dateString) => {
 };
 
 onMounted(fetchBloodnations);
-
 </script>
-
-
-
-<style> 
-
+<style>
 .card-container-home {
-display: grid;
-grid-template-columns: repeat(5, 1fr);
-gap: 20px;
-margin-left: 70px;
-justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-left: 70px;
+  justify-content: flex-start;
 }
 
 .card {
-display: flex;
-flex-direction: column;
-padding: 10px;
-background-color: #f8f9fa;
-border: 1px solid #ccc;
-border-radius: 15px;
-margin: 70px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 300px;
+  margin: 20px auto; /* Pusatkan card */
 }
 
+
 .bloodnation-image {
-width: 200px;
-height: auto;
-border-radius: 5px 5px 0 0;
+  width: 200px;
+  height: auto;
+  border-radius: 5px 5px 0 0;
 }
 
 .card-content {
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-margin-top: auto;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: auto;
+  align-items: center;
 }
 
-.card-content p {
-margin: 0;
+.card-content h3,
+.card-content p,
+.card-content .details-link {
+  margin: 4px ; /* Atur jarak atas dan bawah menjadi 10px, jarak kiri dan kanan menjadi 0 */
 }
+
 
 button {
-margin-top: 10px;
-margin-right: 10px;
-padding: 5px 10px;
-background-color: #007bff;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
+  margin-top: 10px;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .card-content b {
-font-weight: bold;
+  font-weight: bold;
 }
 
 .quota {
-color: white;
-background-color: red;
-padding: 5px 10px;
-border-radius: 10px;
-display: inline-block;
-font-size: 15px;
+  color: white;
+  background-color: red;
+  padding: 5px 10px;
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 15px;
 }
 
 .detail {
-color: blue;
+  color: blue;
 }
 
-.details-link {
-color: blue;
-text-decoration: underline;
-}
 
 .search-container {
-margin-bottom: 20px;
-display: contents;
-margin-top: 200px;
+  margin-bottom: 20px;
+  display: contents;
+  margin-top: 200px;
 }
 
-
 .pagination {
-display: flex;
-justify-content: center;
-margin-top: 20px;
-list-style: none;
-padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
 }
 
 .page-item {
-margin: 0 5px;
+  margin: 0 5px;
 }
 
 .page-item a {
-color: #007bff;
-text-decoration: none;
-padding: 8px 12px;
-border: 1px solid #ddd;
-border-radius: 5px;
+  color: #007bff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .page-item a:hover {
-background-color: #007bff;
-color: white;
-border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 .page-item.active a {
-background-color: #007bff;
-color: white;
-border-color: #007bff;
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 .page-item.disabled a {
-color: #ccc;
-cursor: not-allowed;
-}
-.name-style b {
-margin-right: 0; 
+  color: #ccc;
+  cursor: not-allowed;
 }
 
+.name-style b {
+  margin-right: 0;
+}
+
+.search-select {
+  margin-top: 100px;
+  margin-left: 80px;
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.search-input {
+  margin-top: 20px;
+  width: 1500px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.search-button {
+  height: 30px;
+  width: 60px;
+  margin-top: 20px;
+}
 </style>
