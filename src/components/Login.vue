@@ -34,7 +34,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useCounterStore } from '@/store/counter'; // Import store
+import { useCounterStore } from '@/store/counter'; 
 
 const email = ref('');
 const password = ref('');
@@ -43,12 +43,12 @@ const loginError = ref('');
 const loginMessage = ref('');
 const router = useRouter();
 
-const counterStore = useCounterStore(); // Buat instance store
+const counterStore = useCounterStore(); 
 
 const login = async () => {
   isLoggingIn.value = true;
-  loginError.value = ''; // Reset error message
-  loginMessage.value = ''; // Reset success message
+  loginError.value = ''; 
+  loginMessage.value = '';
 
   try {
     const responsedata = await counterStore.loginUser({ email: email.value, password: password.value }); // Panggil loginUser dari store
@@ -75,13 +75,13 @@ const login = async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full height to center vertically */
-  background-color: white; /* Mengubah background menjadi putih */
+  height: 100vh; 
+  background-color: white; 
 }
 
 .custom-card {
   width: 800px;
-  background-color: white; /* Mengubah warna background card menjadi putih */
+  background-color: white; 
   border: 2px solid #dc3545;
   border-radius: 15px;
 }
@@ -101,7 +101,7 @@ const login = async () => {
 }
 
 .custom-form-group {
-  margin-bottom: 20px; /* Mengatur jarak antara elemen form */
+  margin-bottom: 20px; 
 }
 
 .custom-input {
@@ -111,7 +111,7 @@ const login = async () => {
 }
 
 .custom-button-login {
-  width: 80px; /* Lebar tombol menjadi lebih lebar ke arah kanan */
+  width: 80px; 
   height: 40px;
   background-color: #dc3545;
 }
@@ -126,7 +126,7 @@ const login = async () => {
 }
 
 .costum-login1 {
-  font-size: 24px; /* Ubah ukuran teks sesuai kebutuhan */
-  color: black; /* Ubah warna teks menjadi hitam */
+  font-size: 24px; 
+  color: black; 
 }
 </style>

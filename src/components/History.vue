@@ -17,13 +17,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'; // Import ref dan onMounted dari Vue 3
-import { useCounterStore } from '@/store/counter'; // Sesuaikan path sesuai dengan struktur proyek Anda
+import { ref, onMounted } from 'vue'; 
+import { useCounterStore } from '@/store/counter'; 
 import { useRouter } from 'vue-router';
 const router = useRouter('');
 
 const counterStore = useCounterStore();
-const reservations = ref([]); // Deklarasikan reservations sebagai ref
+const reservations = ref([]);
 
 const fetchReservations = async () => {
   try {
@@ -50,15 +50,6 @@ const formatDate = (date) => {
     return 'Invalid Date';
   }
 };
-// const deleteReservation = async (reservationId) => {
-//   try {
-//     await counterStore.deleteReservation(reservationId);
-//     reservations.value = reservations.value.filter(reservation => reservation.id !== reservationId);
-//     console.log('Deleted reservation with ID:', reservationId);
-//   } catch (error) {
-//     console.error('Error deleting reservation:', error);
-//   }
-// };
 
 onMounted(() => {
   const token = localStorage.getItem('token');

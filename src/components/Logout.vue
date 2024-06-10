@@ -21,32 +21,31 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useCounterStore } from '@/store/counter'; // Import store
+import { useCounterStore } from '@/store/counter'; 
 
 
-const store = useCounterStore(); // Access the Pinia store
+const store = useCounterStore(); 
 
 const loggedOut = ref(false);
 const router = useRouter();
 
 const logout = () => {
-  localStorage.clear(); // Clear user session
+  localStorage.clear(); 
   loggedOut.value = true;
-  router.push('/login'); // Redirect to login page
+  router.push('/login'); 
 };
 
 const cancelLogout = () => {
-  router.push('/history'); // Redirect back to the history page
+  router.push('/history'); 
 };
 </script>
 
 <style>
-/* Add custom styles for the component here */
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Pusatkan konten secara horizontal */
-  margin-top: 50px; /* Berikan margin atas untuk memberikan ruang */
+  align-items: center; 
+  margin-top: 50px; 
 }
 
 .button-container {
@@ -60,11 +59,11 @@ const cancelLogout = () => {
 }
 
 .btn-equal {
-  width: 120px; /* Adjust size as needed */
+  width: 120px; 
 }
 .card-header-logout{
   .card-header-logout {
-  text-align: center; /* Pusatkan teks secara horizontal */
-  padding: 20px; /* Berikan padding untuk meningkatkan ruang */
+  text-align: center; 
+  padding: 20px; 
 }};
 </style>

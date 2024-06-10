@@ -38,7 +38,7 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Set the container height to the full viewport height */
+  height: 100vh; 
   width: 100%;
   background-color: white;
   padding: 20px;
@@ -73,11 +73,11 @@ h1 {
   flex-direction: column;
   align-items: center;
   transition: transform 0.3s;
-  border: 2px solid red; /* Ubah warna border menjadi merah */
+  border: 2px solid red; 
 }
 
 .profile-card:hover {
-  transform: translateY(-10px); /* Adds a subtle hover effect */
+  transform: translateY(-10px); 
 }
 
 .profile-info {

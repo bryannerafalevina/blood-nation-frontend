@@ -54,7 +54,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter('');
 
 const counterStore = useCounterStore();
-const originalBloodnations = ref([]); // Menyimpan data asli
+const originalBloodnations = ref([]); 
 const bloodnations = ref([]);
 const searchQuery = ref('');
 const searchType = ref('');
@@ -78,7 +78,7 @@ const totalPages = computed(() => {
 const fetchBloodnations = async () => {
   try {
     await counterStore.fetchBloodnations();
-    originalBloodnations.value = counterStore.bloodnations; // Simpan data asli
+    originalBloodnations.value = counterStore.bloodnations; 
     bloodnations.value = counterStore.bloodnations;
     filteredBloodnations.value = counterStore.filteredBloodnations;
   } catch (error) {
@@ -132,7 +132,7 @@ onMounted(fetchBloodnations);
   gap: 20px;
   margin-left: 70px;
   justify-content: flex-start;
-  margin-bottom: 20px; /* Tambahkan margin-bottom di sini */
+  margin-bottom: 20px; 
 }
 
 .card {
@@ -143,7 +143,7 @@ onMounted(fetchBloodnations);
   border: 1px solid #ccc;
   border-radius: 10px;
   max-width: 300px;
-  margin: 20px auto; /* Pusatkan card */
+  margin: 20px auto; 
   border: 2px solid red;
 }
 
@@ -165,7 +165,7 @@ onMounted(fetchBloodnations);
 .card-content h3,
 .card-content p,
 .card-content .details-link {
-  margin: 4px ; /* Atur jarak atas dan bawah menjadi 10px, jarak kiri dan kanan menjadi 0 */
+  margin: 4px ; 
 }
 
 

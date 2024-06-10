@@ -58,7 +58,7 @@ const register = async () => {
     await counterStore.registerUser({ username: username.value, email: email.value, password: password.value, phoneNumber: phoneNumber.value });
     isRegistered.value = true;
     setTimeout(() => {
-      router.push('/login'); // Redirect after a short delay
+      router.push('/login'); 
     }, 2000);
     username.value = '';
     email.value = '';
@@ -82,7 +82,7 @@ const register = async () => {
   justify-content: center;
   align-items: center;
   animation: fadeInUp 0.5s ease forwards;
-  border: 2px solid #dc3545; /* Add a 2px solid border with red color */
+  border: 2px solid #dc3545; 
   width: 600px; 
   height: 700px;
   margin-top: 70px;
@@ -127,14 +127,14 @@ const register = async () => {
 
 .form-control2 {
   display: block;
-  width: 570px; /* Set the width to 570px to match the length of the other input fields */
-  margin-top: 5px; /* Add some space between label and input */
+  width: 570px; 
+  margin-top: 5px; 
   border-radius: 5px;
   height: 30px;
 }
 
 .custom-form-group {
-  margin-bottom: 20px; /* Add space between form elements */
+  margin-bottom: 20px; 
 }
 
 .costum-regist1 {

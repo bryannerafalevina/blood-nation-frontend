@@ -73,7 +73,7 @@ onMounted(() => {
 }
 
 .custom-title {
-  color: black; /* Warna teks judul diubah menjadi hitam */
+  color: black; 
 }
 
 .card-details {

@@ -42,8 +42,8 @@
 import { ref, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useToast } from 'vue-toastification';
-import { useCounterStore } from '@/store/counter'; // Import store
-const store = useCounterStore(); // Access the Pinia store
+import { useCounterStore } from '@/store/counter'; 
+const store = useCounterStore(); 
 
 const toast = useToast();
 const router = useRouter();
@@ -57,38 +57,34 @@ const formData = reactive({
 });
 
 const submitForm = async () => {
-  // Check if any form field is empty
+
   if (!formData.address || !formData.age || !formData.weight || !formData.bloodType) {
     toast.error('Please fill in all fields');
     return;
   }
 
-  // Check if age and weight are numbers
+  
   if (isNaN(formData.age) || isNaN(formData.weight)) {
     toast.error('Age and weight must be numbers');
     return;
   }
 
-  // Check if age is within range
   if (formData.age < 18 || formData.age > 65) {
     toast.error('Age must be between 18 and 65');
     return;
   }
 
-  // Check if weight is within range
   if (formData.weight < 40 || formData.weight > 150) {
     toast.error('Weight must be between 40 and 150');
     return;
   }
 
-  // Check if bloodtype is a valid value
   const validBloodTypes = ['A', 'O', 'B', 'AB'];
   if (!validBloodTypes.includes(formData.bloodType.toUpperCase())) {
     toast.error('Blood type must be A, O, B, or AB');
     return;
   }
 
-  // Retrieve user ID from local storage
   const userID = localStorage.getItem('userID');
   if (!userID) {
     toast.error('User ID not found');
@@ -96,7 +92,6 @@ const submitForm = async () => {
   }
   console.log(userID);
 
-  // Proceed with form submission
   const token = localStorage.getItem('token');
   const eventId = route.params.id;
   try {
