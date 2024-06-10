@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 800px;">
     <div class="card p-4 custom-card mx-auto">
       <img src="../assets/login.png" alt="Blood Nation Logo" class="custom-img">
       <div class="card-header bg-primary text-white text-center custom-header">
