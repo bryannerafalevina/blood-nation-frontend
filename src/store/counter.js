@@ -18,7 +18,7 @@ export const useCounterStore = defineStore('counter', {
       const userId = localStorage.getItem('userID');
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('http://3.27.136.219/events', {
+        const response = await fetch('https://3.27.136.219/events', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const useCounterStore = defineStore('counter', {
     async fetchReservations(userId) {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`http://3.27.136.219/reservations/user/${userId}`, {
+        const response = await fetch(`https://3.27.136.219/reservations/user/${userId}`, {
           headers: {
             'Content-Type': 'application/json',
             'token' : token,
@@ -51,7 +51,7 @@ export const useCounterStore = defineStore('counter', {
     async fetchEventById(eventId) {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`http://3.27.136.219/events/${eventId}`, {
+        const response = await fetch(`https://3.27.136.219/events/${eventId}`, {
           headers: {
             'Content-Type': 'application/json',
             'token': token,
@@ -66,7 +66,7 @@ export const useCounterStore = defineStore('counter', {
     },
     async loginUser(credentials) {
       try {
-        const response = await fetch(`http://3.27.136.219/users/login`, {
+        const response = await fetch(`https://3.27.136.219/users/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ export const useCounterStore = defineStore('counter', {
     async registerUser(userInfo) {
       console.log(userInfo,"-infoo");
       try {
-        const response = await fetch(`http://3.27.136.219/users/register`, {
+        const response = await fetch(`https://3.27.136.219/users/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export const useCounterStore = defineStore('counter', {
       console.log(JSON.stringify(formData))
       console.log(eventId)
       console.log(user_id)
-      const response = await fetch(`http://3.27.136.219/reservations/${eventId}/${user_id}`, {
+      const response = await fetch(`https://3.27.136.219/reservations/${eventId}/${user_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export const useCounterStore = defineStore('counter', {
       const user_Id = localStorage.getItem('userID');
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`http://3.27.136.219/users/${user_Id}`, {
+        const response = await fetch(`https://3.27.136.219/users/${user_Id}`, {
           headers: {
             'Content-Type': 'application/json',
             'token' : token,

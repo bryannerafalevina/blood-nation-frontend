@@ -46,7 +46,7 @@ export default {
   const user_id = localStorage.getItem('userID');
   const token = localStorage.getItem('token');
   if (user_id && token) {
-    fetch(`http://3.27.136.219/users/${user_id}`, {
+    fetch(`https://3.27.136.219/users/${user_id}`, {
       headers: {
         'token': token,
         'Content-Type': 'application/json'
