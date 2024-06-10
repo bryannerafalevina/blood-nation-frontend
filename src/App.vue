@@ -46,7 +46,7 @@ export default {
   const user_id = localStorage.getItem('userID');
   const token = localStorage.getItem('token');
   if (user_id && token) {
-    fetch(`https://3.27.136.219/users/${user_id}`, {
+    fetch(`http://3.27.136.219/users/${user_id}`, {
       headers: {
         'token': token,
         'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ export default {
 
 <style>
 /* Add Bootstrap styles */
-@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css');
+@import url('http://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css');
 
 
 .router-link-exact-active {
