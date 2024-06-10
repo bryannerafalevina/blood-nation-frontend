@@ -1,6 +1,6 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center">
-    <div class="card p-4" style="width: 600px; height: 690px;">
+    <div class="card-register p-4">
       <img src="../assets/register.png" alt="Blood Nation Logo" style="width: 300px;">
       <div class="card-header bg-danger text-white text-center">
         <h4 class="card-title costum-regist1">Register for a Blood Nation Account</h4>
@@ -13,11 +13,11 @@
           </div>
           <div class="mb-3">
             <label for="email" class="form-label costum-regist2">Email address</label>
-            <input type="email" class="form-control2" id="email" v-model="email" placeholder="Enter your email address" required style="width: 570px;">
+            <input type="email" class="form-control2" id="email" v-model="email" placeholder="Enter your email address" required>
           </div>
           <div class="mb-3">
             <label for="password" class="form-label costum-regist2">Password</label>
-            <input type="password" class="form-control2" id="password" v-model="password" placeholder="Enter a password" required style="width: 570px;">
+            <input type="password" class="form-control2" id="password" v-model="password" placeholder="Enter a password" required>
           </div>
           <div class="mb-3">
             <label for="phoneNumber" class="form-label costum-regist2">Phone Number</label>
@@ -37,11 +37,10 @@
   </div>
 </template>
 
-
 <script setup>
-import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
 
 const router = useRouter();
 const counterStore = useCounterStore();
@@ -50,18 +49,26 @@ const username = ref('');
 const email = ref('');
 const password = ref('');
 const phoneNumber = ref('');
+const isSubmitting = ref(false);
+const isRegistered = ref(false);
 
 const register = async () => {
+  isSubmitting.value = true;
   try {
     await counterStore.registerUser({ username: username.value, email: email.value, password: password.value, phoneNumber: phoneNumber.value });
-    router.push('/login'); // Replace '/success' with the route you want to redirect to
-    username.value = ''
-    email.value = ''
-    password.value = ''
-    phoneNumber.value = ''
+    isRegistered.value = true;
+    setTimeout(() => {
+      router.push('/login'); // Redirect after a short delay
+    }, 2000);
+    username.value = '';
+    email.value = '';
+    password.value = '';
+    phoneNumber.value = '';
   } catch (error) {
     console.error('Registration error:', error);
     alert('Registration failed. Please try again.');
+  } finally {
+    isSubmitting.value = false;
   }
 };
 </script>
@@ -69,7 +76,7 @@ const register = async () => {
 
 
 <style>
-.card {
+.card-register {
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -78,6 +85,9 @@ const register = async () => {
   align-items: center;
   animation: fadeInUp 0.5s ease forwards;
   border: 2px solid #dc3545; /* Add a 2px solid border with red color */
+  width: 600px; 
+  height: 700px;
+  margin-top: 70px;
 }
 
 @keyframes fadeInUp {

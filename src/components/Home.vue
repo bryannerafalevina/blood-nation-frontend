@@ -1,5 +1,4 @@
 <template>
-  <!-- <p>{{ bloodnations }}</p> -->
   <div class="search-container-md">
     <select v-model="searchType" class="search-select">
       <option value="name">Name</option>
@@ -10,12 +9,8 @@
     <input type="text" v-model="searchQuery" :placeholder="'Search by ' + searchType" class="search-input">
     <button @click="search(searchQuery)" class="search-button">Submit</button>
 
-    <!-- <div v-if="isSubmitted" class="card-container-home"> -->
-      <!-- <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card"> -->
       <div v-for="(bloodnation, index) in paginatedBloodnations" :key="index" class="card">
-        <!-- <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" /> -->
         <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" @error="handleImageError(bloodnation.image_url)" />
-
         <div class="card-content">
           <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
           <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
@@ -24,13 +19,10 @@
           <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
         </div>
       </div>
-    <!-- </div> -->
-
-    <!-- <div v-else> -->
+  
       <p v-if="!filteredBloodnations.length"></p>
       <div v-else class="card-container-home">
-        <!-- <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card"> -->
-        <div v-for="(bloodnation, index) in paginatedBloodnations" :key="index" class="card">
+        <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card">
           <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" />
           <div class="card-content">
             <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
@@ -53,7 +45,6 @@
         </li>
       </ul>
     </nav>
-  <!-- </div> -->
 </template>
 
 <script setup>

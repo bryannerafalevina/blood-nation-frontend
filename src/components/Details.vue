@@ -64,6 +64,7 @@ onMounted(() => {
   justify-content: center;
 }
 .card {
+  margin-top: 100px;
   border-radius: 15px;
 }
 

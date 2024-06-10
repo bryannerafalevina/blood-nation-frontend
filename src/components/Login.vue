@@ -12,7 +12,7 @@
             <input type="email" class="form-control" id="email" v-model="email" placeholder="Enter your email address" required>
           </div>
           <div class="mb-3">
-            <label for="password" class="costum-login2"><b>Password</b></label> <br>
+            <label for="password" class="costum-login2">Password</label> <br>
             <input type="password" class="form-control" id="password" v-model="password" placeholder="Enter your password" required>
           </div>
           <button type="submit" class="btn btn-danger btn-block" style="width: 80px; height: 40px" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
@@ -69,7 +69,6 @@ const login = async () => {
   }
 };
 </script>
-
 <style>
 .card {
   display: flex;
@@ -97,25 +96,16 @@ const login = async () => {
   border-color: #0056b3;
 }
 
-#email {
+.form-control {
   width: 270px;
   height: 30px;
   border-radius: 5px;
 }
 
-#password {
-  width: 270px;
-  height: 30px;
-  border-radius: 5px;
-}
-
-.costum-login1 {
-  font-size: 27px;
-  font-weight: bolder;
-}
 
 .costum-login2 {
   font-size: 18px;
-  color: red;
+  color: black;
+
 }
 </style>

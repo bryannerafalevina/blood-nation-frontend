@@ -11,14 +11,12 @@ export const useCounterStore = defineStore('counter', {
     reservations: [],
     user: {},
     token: null,
-    user_id: null, // Add user_id to the state
+    user_id: null,
   }),
   actions: {
     async fetchBloodnations() {
       const userId = localStorage.getItem('userID');
       const token = localStorage.getItem('token');
-      // console.log(token, '==bloodnation');
-      // console.log(userId, '==bloodnation22');
       try {
         const response = await fetch('http://localhost:3000/events', {
           method: 'GET',
@@ -28,11 +26,7 @@ export const useCounterStore = defineStore('counter', {
           },
         });
         let data = await response.json();
-        // console.log(data, 'tess');
-        this.bloodnations = data; // Memperbarui state langsung dari store
-        // counterStore.filteredBloodnations = data; // Memperbarui state langsung dari store
-        // console.log(counterStore.filteredBloodnations);
-        // console.log(this.bloodnations, 'this');
+        this.bloodnations = data; 
       } catch (error) {
         console.error('Error fetching bloodnations:', error);
       }
@@ -83,8 +77,8 @@ export const useCounterStore = defineStore('counter', {
         if (!response.ok) {
           throw new Error(data.message || 'Login failed');
         }
-        this.$state.token = data.token; // Update state directly
-        this.$state.user_id = data.user_id; // Update state directly
+        this.$state.token = data.token; 
+        this.$state.user_id = data.user_id; 
         console.log('Login successful:', data);
       } catch (error) {
         console.error('Error logging in:', error);
@@ -102,7 +96,6 @@ export const useCounterStore = defineStore('counter', {
           body: JSON.stringify(userInfo),
         });
         const data = await response.json();
-        // Handle the response data as needed
       } catch (error) {
         console.error('Error registering user:', error);
       }
@@ -137,7 +130,7 @@ export const useCounterStore = defineStore('counter', {
         });
         const data = await response.json();
         console.log(data,"data---");
-        this.$state.user = data; // Update state directly
+        this.$state.user = data; 
 
       } catch (error) {
         console.error('Error fetching user:', error);
@@ -145,17 +138,11 @@ export const useCounterStore = defineStore('counter', {
     },
     async logout() {
       try {
-        // Clear user session
         localStorage.clear();
-        // Other async logout logic can go here
-        // For example, you can make an API call to invalidate the user session on the server-side
-        // Simulate a delay using setTimeout to demonstrate an asynchronous operation
         await new Promise((resolve) => setTimeout(resolve, 1000));
-        // Update store state after logout
-        this.$state.token = null; // Update state directly
-        this.$state.user_id = null; // Update state directly
-        this.$state.user = null; // Update state directly
-        // Reset any other state variables as needed
+        this.$state.token = null; 
+        this.$state.user_id = null; 
+        this.$state.user = null; 
       } catch (error) {
         console.error('Error during logout:', error);
         throw error;
