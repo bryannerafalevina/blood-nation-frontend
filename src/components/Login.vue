@@ -80,7 +80,6 @@ const login = async () => {
 }
 
 .custom-card {
-  width: 800px;
   background-color: white; 
   border: 2px solid #dc3545;
   border-radius: 15px;
