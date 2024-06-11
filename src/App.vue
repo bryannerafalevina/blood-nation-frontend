@@ -46,7 +46,7 @@ export default {
   const user_id = localStorage.getItem('userID');
   const token = localStorage.getItem('token');
   if (user_id && token) {
-    fetch(`https://blood-nation.handuktangerang.online/`, {
+    fetch(`https://blood-nation.handuktangerang.online/users/${user_id}`, {
       headers: {
         'token': token,
         'Content-Type': 'application/json'

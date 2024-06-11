@@ -18,7 +18,7 @@ export const useCounterStore = defineStore('counter', {
       const userId = localStorage.getItem('userID');
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch('https://blood-nation.handuktangerang.online/', {
+        const response = await fetch('https://blood-nation.handuktangerang.online/events', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export const useCounterStore = defineStore('counter', {
     async fetchReservations(userId) {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`https://blood-nation.handuktangerang.online/`, {
+        const response = await fetch(`https://blood-nation.handuktangerang.online/reservations/user/${userId}`, {
           headers: {
             'Content-Type': 'application/json',
             'token' : token,
@@ -51,7 +51,7 @@ export const useCounterStore = defineStore('counter', {
     async fetchEventById(eventId) {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`https://blood-nation.handuktangerang.online/`, {
+        const response = await fetch(`https://blood-nation.handuktangerang.online/events/${eventId}`, {
           headers: {
             'Content-Type': 'application/json',
             'token': token,
@@ -66,7 +66,7 @@ export const useCounterStore = defineStore('counter', {
     },
     async loginUser(credentials) {
       try {
-        const response = await fetch(`https://blood-nation.handuktangerang.online/`, {
+        const response = await fetch(`https://blood-nation.handuktangerang.online/users/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ export const useCounterStore = defineStore('counter', {
     async registerUser(userInfo) {
       console.log(userInfo,"-infoo");
       try {
-        const response = await fetch(`https://blood-nation.handuktangerang.online/`, {
+        const response = await fetch(`https://blood-nation.handuktangerang.online/users/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ export const useCounterStore = defineStore('counter', {
       console.log(JSON.stringify(formData))
       console.log(eventId)
       console.log(user_id)
-      const response = await fetch(`https://blood-nation.handuktangerang.online/`, {
+      const response = await fetch(`https://blood-nation.handuktangerang.online/reservations/${eventId}/${user_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export const useCounterStore = defineStore('counter', {
       const user_Id = localStorage.getItem('userID');
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`https://blood-nation.handuktangerang.online/`, {
+        const response = await fetch(`https://blood-nation.handuktangerang.online/users/${user_Id}`, {
           headers: {
             'Content-Type': 'application/json',
             'token' : token,
