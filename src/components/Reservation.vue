@@ -155,6 +155,14 @@ const submitForm = async () => {
   margin-bottom: 10px;
 }
 
+.form-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  margin-top: 5px; 
+}
+
 .btn {
   padding: 10px 20px;
   background-color: #dc3545; 
@@ -164,15 +172,6 @@ const submitForm = async () => {
   cursor: pointer;
 }
 
-.btn:hover {
-  background-color: #c82333; 
-}
 
-.form-select {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  margin-top: 5px; 
-}
+
 </style>

@@ -53,17 +53,18 @@ const cancelLogout = () => {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-}
-.button-container button {
   margin: 5px;
 }
 
 .btn-equal {
   width: 120px; 
+  background-color: red;
 }
+
 .card-header-logout{
   .card-header-logout {
   text-align: center; 
   padding: 20px; 
 }};
+
 </style>

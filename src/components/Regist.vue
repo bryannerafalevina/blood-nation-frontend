@@ -5,7 +5,7 @@
       <div class="card-header bg-danger text-white text-center">
         <h4 class="card-title costum-regist1">Register for a Blood Nation Account</h4>
       </div>
-      <div class="card-body">
+      <div class="card-body2">
         <form @submit.prevent="register" v-if="!isRegistered">
           <div class="mb-3 custom-form-group">
             <label for="username" class="form-label costum-regist2">Username</label>
@@ -88,16 +88,6 @@ const register = async () => {
   margin-top: 70px;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 .card-header {
   border-radius: 5px 5px 0 0;
@@ -134,19 +124,8 @@ const register = async () => {
 }
 
 .custom-form-group {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
-.costum-regist1 {
-  font-size: 27px;
-}
 
-.costum-regist2 {
-  font-size: 18px;
-  margin-right: 20px;
-}
-
-.costum-regist3 {
-  font-size: 17px;
-}
 </style>

@@ -109,14 +109,10 @@ const login = async () => {
   border-radius: 5px;
 }
 
-.custom-button-login {
-  width: 80px; 
-  height: 40px;
-  background-color: #dc3545;
-}
 
-.custom-footer {
-  border-radius: 0 0 15px 15px;
+.costum-login1 {
+  font-size: 24px; 
+  color: black; 
 }
 
 .costum-login2 {
@@ -124,8 +120,14 @@ const login = async () => {
   color: black;
 }
 
-.costum-login1 {
-  font-size: 24px; 
-  color: black; 
+.custom-footer {
+  border-radius: 0 0 15px 15px;
 }
+
+.custom-button-login {
+  width: 80px; 
+  height: 40px;
+  background-color: #dc3545;
+}
+
 </style>

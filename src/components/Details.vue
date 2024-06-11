@@ -64,17 +64,12 @@ onMounted(() => {
 }
 
 .custom-card {
-  background-color: #f8f9fa;
+  background-color: whitea;
   width: 350px;
 }
 
-.custom-header {
-  color: white;
-}
 
-.custom-title {
-  color: black; 
-}
+
 
 .card-details {
   margin-top: 100px;
@@ -85,17 +80,19 @@ onMounted(() => {
   text-align: center;
 }
 
+.card-title {
+  font-size: 1.5rem;
+}
+
 .card-body p {
   margin: 10px 0;
 }
 
-.card-title {
-  font-size: 1.5rem;
-}
 
 .btn-details {
   margin-top: 20px;
   background-color: red;
   color: white;
 }
+
 </style>

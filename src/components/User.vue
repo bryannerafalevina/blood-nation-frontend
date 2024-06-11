@@ -53,13 +53,6 @@ onMounted(async () => {
   width: 65vw;
 }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 2.5em;
-  font-weight: bold;
-  color: black;
-}
 
 .profile-card {
   background-color: white;
@@ -76,9 +69,7 @@ h1 {
   border: 2px solid red; 
 }
 
-.profile-card:hover {
-  transform: translateY(-10px); 
-}
+
 
 .profile-info {
   font-size: 18px;
@@ -98,22 +89,5 @@ h1 {
   margin-bottom: 5px;
 }
 
-.profile-info a {
-  color: #ff5f6d;
-  text-decoration: none;
-}
 
-.profile-info a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 600px) {
-  .profile-card {
-    padding: 20px;
-  }
-
-  .profile-info {
-    font-size: 16px;
-  }
-}
 </style>

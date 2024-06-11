@@ -126,13 +126,27 @@ const formatDate = (dateString) => {
 onMounted(fetchBloodnations);
 </script>
 <style>
-.card-container-home {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
-  margin-left: 70px;
-  justify-content: flex-start;
-  margin-bottom: 20px; 
+.search-select {
+  margin-top: 100px;
+  margin-left: 80px;
+  width: 200px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.search-input {
+  margin-top: 20px;
+  width: 1500px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.search-button {
+  height: 30px;
+  width: 60px;
+  margin-top: 20px;
 }
 
 .card {
@@ -147,11 +161,13 @@ onMounted(fetchBloodnations);
   border: 2px solid red;
 }
 
-
-.bloodnation-image {
-  width: 200px;
-  height: auto;
-  border-radius: 5px 5px 0 0;
+.card-container-home {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-left: 70px;
+  justify-content: flex-start;
+  margin-bottom: 20px; 
 }
 
 .card-content {
@@ -161,6 +177,13 @@ onMounted(fetchBloodnations);
   margin-top: auto;
   align-items: center;
 }
+
+.bloodnation-image {
+  width: 200px;
+  height: auto;
+  border-radius: 5px 5px 0 0;
+}
+
 
 .card-content h3,
 .card-content p,
@@ -245,28 +268,7 @@ button {
   margin-right: 0;
 }
 
-.search-select {
-  margin-top: 100px;
-  margin-left: 80px;
-  width: 200px;
-  height: 30px;
-  margin-right: 10px;
-  border-radius: 5px;
-}
 
-.search-input {
-  margin-top: 20px;
-  width: 1500px;
-  height: 30px;
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
-.search-button {
-  height: 30px;
-  width: 60px;
-  margin-top: 20px;
-}
 
 
 </style>
