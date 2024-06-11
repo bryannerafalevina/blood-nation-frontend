@@ -1,6 +1,6 @@
 <template>
-  <div class="container d-flex justify-content-center align-items-center">
-    <div class="card-details mt-5 custom-card">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card-details custom-card">
       <div class="card-header custom-header">
         <h4 class="card-title custom-title">Event Details</h4>
       </div>
@@ -61,19 +61,16 @@ onMounted(() => {
 .container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Minimum height of the viewport */
 }
 
 .custom-card {
-  background-color: whitea;
+  background-color: white;
   width: 350px;
 }
 
-
-
-
 .card-details {
-  margin-top: 100px;
-  margin-bottom: 50px;
   padding: 20px;
   border: 2px solid red;
   border-radius: 15px;
@@ -88,11 +85,9 @@ onMounted(() => {
   margin: 10px 0;
 }
 
-
 .btn-details {
   margin-top: 20px;
   background-color: red;
   color: white;
 }
-
 </style>

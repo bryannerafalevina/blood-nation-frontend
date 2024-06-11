@@ -51,6 +51,7 @@
 import { ref, computed, onMounted } from 'vue';
 import { useCounterStore } from '@/store/counter';
 import { useRouter } from 'vue-router';
+
 const router = useRouter('');
 
 const counterStore = useCounterStore();
