@@ -86,8 +86,7 @@ export default {
 </script>
 
 <style>
-/* Add Bootstrap styles */
-@import url('http://cdn.jsdelivr.net/npm/bootstrap@5.4.0/dist/css/bootstrap.min.css');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 
 .router-link-exact-active {
