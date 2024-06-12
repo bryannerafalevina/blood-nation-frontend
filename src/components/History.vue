@@ -1,21 +1,3 @@
-<template>
-  <div class="history">
-    <h1>Reservation History</h1>
-    <div class="card-container">
-      <div v-for="reservation in reservations" :key="reservation.id" class="card">
-        <div class="card-body">
-          <div class="card-content">
-            <p class="card-text">Date: {{ formatDate(reservation.created_at) }}</p>
-            <p class="card-text">Age: {{ reservation.age }}</p>
-            <p class="card-text">Address: {{ reservation.address }}</p>
-            <p class="card-text">Weight: {{ reservation.weight }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue'; 
 import { useCounterStore } from '@/store/counter'; 
@@ -57,6 +39,24 @@ onMounted(() => {
   fetchReservations(userId, token);
 });
 </script>
+
+<template>
+  <div class="history">
+    <h1>Reservation History</h1>
+    <div class="card-container">
+      <div v-for="reservation in reservations" :key="reservation.id" class="card">
+        <div class="card-body">
+          <div class="card-content">
+            <p class="card-text">Date: {{ formatDate(reservation.created_at) }}</p>
+            <p class="card-text">Age: {{ reservation.age }}</p>
+            <p class="card-text">Address: {{ reservation.address }}</p>
+            <p class="card-text">Weight: {{ reservation.weight }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .history {

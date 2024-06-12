@@ -1,36 +1,3 @@
-<template>
-  <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 800px;">
-    <div class="card p-4 custom-card mx-auto">
-      <img src="../assets/login.png" alt="Blood Nation Logo" class="custom-img">
-      <div class="card-header bg-primary text-white text-center custom-header">
-        <h4 class="card-title costum-login1">Login to Blood Nation</h4>
-      </div>
-      <div class="card-body custom-body">
-        <form @submit.prevent="login">
-          <div class="mb-3 custom-form-group">
-            <label for="email" class="costum-login2">Email address</label> <br>
-            <input type="email" class="form-control custom-input" id="email" v-model="email" placeholder="Enter your email address" required>
-          </div>
-          <div class="mb-3 custom-form-group">
-            <label for="password" class="costum-login2">Password</label> <br>
-            <input type="password" class="form-control custom-input" id="password" v-model="password" placeholder="Enter your password" required>
-          </div>
-          <button type="submit" class="btn-login btn-danger btn-block custom-button-login" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
-        </form>
-        <div v-if="loginError" class="alert alert-danger mt-3" role="alert">
-          {{ loginError }}
-        </div>
-        <div v-if="loginMessage" class="alert alert-success mt-3" role="alert">
-          {{ loginMessage }}
-        </div>
-      </div>
-      <div class="card-footer bg-light text-muted text-center custom-footer">
-        <p class="mt-3 text-center costum-login3">Don't have an account? <router-link to="/regist"> <span style="color: red;">Regist</span></router-link></p>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -69,6 +36,39 @@ const login = async () => {
   }
 };
 </script>
+
+<template>
+  <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 800px;">
+    <div class="card p-4 custom-card mx-auto">
+      <img src="../assets/login.png" alt="Blood Nation Logo" class="custom-img">
+      <div class="card-header bg-primary text-white text-center custom-header">
+        <h4 class="card-title costum-login1">Login to Blood Nation</h4>
+      </div>
+      <div class="card-body custom-body">
+        <form @submit.prevent="login">
+          <div class="mb-3 custom-form-group">
+            <label for="email" class="costum-login2">Email address</label> <br>
+            <input type="email" class="form-control custom-input" id="email" v-model="email" placeholder="Enter your email address" required>
+          </div>
+          <div class="mb-3 custom-form-group">
+            <label for="password" class="costum-login2">Password</label> <br>
+            <input type="password" class="form-control custom-input" id="password" v-model="password" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="btn-login btn-danger btn-block custom-button-login" :disabled="isLoggingIn">{{ isLoggingIn ? 'Logging in...' : 'Login' }}</button>
+        </form>
+        <div v-if="loginError" class="alert alert-danger mt-3" role="alert">
+          {{ loginError }}
+        </div>
+        <div v-if="loginMessage" class="alert alert-success mt-3" role="alert">
+          {{ loginMessage }}
+        </div>
+      </div>
+      <div class="card-footer bg-light text-muted text-center custom-footer">
+        <p class="mt-3 text-center costum-login3">Don't have an account? <router-link to="/regist"> <span style="color: red;">Regist</span></router-link></p>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .container-fluid {

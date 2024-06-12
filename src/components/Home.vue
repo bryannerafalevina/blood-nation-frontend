@@ -1,52 +1,3 @@
-<template>
-  <div class="search-container-md">
-    <select v-model="searchType" class="search-select">
-      <option value="name">Name</option>
-      <option value="location">Location</option>
-      <option value="quota">Quota</option>
-      <option value="date">Date</option>
-    </select>
-    <input type="text" v-model="searchQuery" :placeholder="'Search by ' + searchType" class="search-input">
-    <button @click="search(searchQuery)" class="search-button">Submit</button>
-
-      <div v-for="(bloodnation, index) in paginatedBloodnations" :key="index" class="card">
-        <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" @error="handleImageError(bloodnation.image_url)" />
-        <div class="card-content">
-          <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
-          <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
-          <p class="quota">Quota: {{ bloodnation.quota }} people</p>
-          <p class="detail">{{ bloodnation.detail }}</p>
-          <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
-        </div>
-      </div>
-  
-      <p v-if="!filteredBloodnations.length"></p>
-      <div v-else class="card-container-home">
-        <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card">
-          <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" />
-          <div class="card-content">
-            <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
-            <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
-            <p class="quota">Quota: {{ bloodnation.quota }} people</p>
-            <p class="detail">{{ bloodnation.detail }}</p>
-            <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item" :class="{ disabled: currentPage === 1 }">
-          <a class="page-link" href="#" @click.prevent="prevPage()">Previous</a>
-        </li>
-        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-          <a class="page-link" href="#" @click.prevent="nextPage()">Next</a>
-        </li>
-      </ul>
-    </nav>
-</template>
-
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import { useCounterStore } from '@/store/counter';
@@ -126,6 +77,56 @@ const formatDate = (dateString) => {
 
 onMounted(fetchBloodnations);
 </script>
+
+<template>
+  <div class="search-container-md">
+    <select v-model="searchType" class="search-select">
+      <option value="name">Name</option>
+      <option value="location">Location</option>
+      <option value="quota">Quota</option>
+      <option value="date">Date</option>
+    </select>
+    <input type="text" v-model="searchQuery" :placeholder="'Search by ' + searchType" class="search-input">
+    <button @click="search(searchQuery)" class="search-button">Submit</button>
+
+      <div v-for="(bloodnation, index) in paginatedBloodnations" :key="index" class="card">
+        <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" @error="handleImageError(bloodnation.image_url)" />
+        <div class="card-content">
+          <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
+          <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
+          <p class="quota">Quota: {{ bloodnation.quota }} people</p>
+          <p class="detail">{{ bloodnation.detail }}</p>
+          <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
+        </div>
+      </div>
+  
+      <p v-if="!filteredBloodnations.length"></p>
+      <div v-else class="card-container-home">
+        <div v-for="(bloodnation, index) in bloodnations" :key="index" class="card">
+          <img :src="bloodnation.image_url" alt="bloodnation Image" class="bloodnation-image" />
+          <div class="card-content">
+            <h3 class="name-style"><b>{{ bloodnation.name }}</b></h3>
+            <p class="location-style">{{ formatDate(bloodnation.date) }}, {{ bloodnation.location }}</p>
+            <p class="quota">Quota: {{ bloodnation.quota }} people</p>
+            <p class="detail">{{ bloodnation.detail }}</p>
+            <router-link :to="'/event-details/' + bloodnation.id" class="details-link">Details</router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" :class="{ disabled: currentPage === 1 }">
+          <a class="page-link" href="#" @click.prevent="prevPage()">Previous</a>
+        </li>
+        <li class="page-item" :class="{ disabled: currentPage === totalPages }">
+          <a class="page-link" href="#" @click.prevent="nextPage()">Next</a>
+        </li>
+      </ul>
+    </nav>
+</template>
+
 <style>
 .search-select {
   margin-top: 100px;

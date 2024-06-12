@@ -1,3 +1,39 @@
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
+
+const router = useRouter();
+const counterStore = useCounterStore();
+
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const phoneNumber = ref('');
+const isSubmitting = ref(false);
+const isRegistered = ref(false);
+
+const register = async () => {
+  isSubmitting.value = true;
+  try {
+    await counterStore.registerUser({ username: username.value, email: email.value, password: password.value, phoneNumber: phoneNumber.value });
+    isRegistered.value = true;
+    setTimeout(() => {
+      router.push('/login'); 
+    }, 2000);
+    username.value = '';
+    email.value = '';
+    password.value = '';
+    phoneNumber.value = '';
+  } catch (error) {
+    console.error('Registration error:', error);
+    alert('Registration failed. Please try again.');
+  } finally {
+    isSubmitting.value = false;
+  }
+};
+</script>
+
 <template>
   <div class="container d-flex justify-content-center align-items-center">
     <div class="card-register p-4">
@@ -36,42 +72,6 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useCounterStore } from '@/store/counter'; // Adjust the path according to your project structure
-
-const router = useRouter();
-const counterStore = useCounterStore();
-
-const username = ref('');
-const email = ref('');
-const password = ref('');
-const phoneNumber = ref('');
-const isSubmitting = ref(false);
-const isRegistered = ref(false);
-
-const register = async () => {
-  isSubmitting.value = true;
-  try {
-    await counterStore.registerUser({ username: username.value, email: email.value, password: password.value, phoneNumber: phoneNumber.value });
-    isRegistered.value = true;
-    setTimeout(() => {
-      router.push('/login'); 
-    }, 2000);
-    username.value = '';
-    email.value = '';
-    password.value = '';
-    phoneNumber.value = '';
-  } catch (error) {
-    console.error('Registration error:', error);
-    alert('Registration failed. Please try again.');
-  } finally {
-    isSubmitting.value = false;
-  }
-};
-</script>
 
 <style scoped>
 .card-register {

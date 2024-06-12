@@ -41,7 +41,7 @@ const fetchEvent = async () => {
     const data = await counterStore.fetchEventById(eventId);
     event.value = {
       ...data,
-      date: data.date.split('T')[0], // Format the date if necessary
+      date: data.date.split('T')[0], 
     };
   } catch (error) {
     console.error('Error fetching event:', error);
@@ -49,7 +49,7 @@ const fetchEvent = async () => {
 };
 
 const goToDetail = () => {
-  router.push(`/reservation/`+eventId); // Navigate to the event detail page
+  router.push(`/reservation/`+eventId); 
 };
 
 onMounted(() => {
@@ -59,10 +59,8 @@ onMounted(() => {
 
 <style>
 .container {
-  display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Minimum height of the viewport */
 }
 
 .custom-card {

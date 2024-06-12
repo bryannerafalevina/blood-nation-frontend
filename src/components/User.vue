@@ -1,18 +1,3 @@
-
-<template>
-  <div class="user-profile-container">
-    <div class="user-profile">
-      <div class="profile-card" v-if="userData">
-        <div class="profile-info">
-          <p><strong>Username:</strong> {{ userData.username }}</p>
-          <p><strong>Email:</strong> {{ userData.email }}</p>
-          <p><strong>Phone Number:</strong> {{ userData.phone_number }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
@@ -32,6 +17,21 @@ onMounted(async () => {
   userData.value = counterStore.user
 });
 </script>
+
+
+<template>
+  <div class="user-profile-container">
+    <div class="user-profile">
+      <div class="profile-card" v-if="userData">
+        <div class="profile-info">
+          <p><strong>Username:</strong> {{ userData.username }}</p>
+          <p><strong>Email:</strong> {{ userData.email }}</p>
+          <p><strong>Phone Number:</strong> {{ userData.phone_number }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <style scoped>
 .user-profile-container {
