@@ -9,15 +9,12 @@ const token = ref('');
 const userId = ref('');
 const router = useRouter('');
 
-
-
 onMounted(async () => { 
   await counterStore.fetchUserData() 
   console.log(counterStore.user,"--user---");
   userData.value = counterStore.user
 });
 </script>
-
 
 <template>
   <div class="user-profile-container">
@@ -53,7 +50,6 @@ onMounted(async () => {
   width: 65vw;
 }
 
-
 .profile-card {
   background-color: white;
   border-radius: 10px;
@@ -68,8 +64,6 @@ onMounted(async () => {
   transition: transform 0.3s;
   border: 2px solid red; 
 }
-
-
 
 .profile-info {
   font-size: 18px;
@@ -88,6 +82,5 @@ onMounted(async () => {
   display: block;
   margin-bottom: 5px;
 }
-
 
 </style>

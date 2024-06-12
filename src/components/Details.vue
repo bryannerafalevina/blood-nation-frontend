@@ -24,7 +24,6 @@ import { useCounterStore } from '@/store/counter';
 const route = useRoute();
 const router = useRouter();
 const counterStore = useCounterStore();
-
 const eventId = route.params.id;
 const token = localStorage.getItem('token');
 const isAuthorized = token !== null;
@@ -88,4 +87,5 @@ onMounted(() => {
   background-color: red;
   color: white;
 }
+
 </style>

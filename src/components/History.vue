@@ -2,8 +2,8 @@
 import { ref, onMounted } from 'vue'; 
 import { useCounterStore } from '@/store/counter'; 
 import { useRouter } from 'vue-router';
-const router = useRouter('');
 
+const router = useRouter('');
 const counterStore = useCounterStore();
 const reservations = ref([]);
 
@@ -62,7 +62,6 @@ onMounted(() => {
 .history {
   font-family: Arial, sans-serif;
   margin-left: 250px;
-
 }
 
 h1 {
@@ -112,4 +111,5 @@ h1 {
 .card:nth-child(even) {
   border: 2px solid #007bff; 
 }
+
 </style>

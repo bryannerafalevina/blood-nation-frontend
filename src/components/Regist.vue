@@ -88,7 +88,6 @@ const register = async () => {
   margin-top: 70px;
 }
 
-
 .card-header {
   border-radius: 5px 5px 0 0;
 }
@@ -126,6 +125,5 @@ const register = async () => {
 .custom-form-group {
   margin-bottom: 20px;
 }
-
 
 </style>

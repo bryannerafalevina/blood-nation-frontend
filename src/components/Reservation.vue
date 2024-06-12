@@ -114,8 +114,6 @@ const submitForm = async () => {
   margin-top: 20px;
 }
 
-
-
 .outer-card {
   padding: 30px;
   border-radius: 10px;
@@ -134,7 +132,6 @@ const submitForm = async () => {
   margin-bottom: 20px;
   color: #dc3545; 
 }
-
 
 .form-group {
   display: flex;
@@ -170,7 +167,5 @@ const submitForm = async () => {
   border-radius: 3px;
   cursor: pointer;
 }
-
-
 
 </style>

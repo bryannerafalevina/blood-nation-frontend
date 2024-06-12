@@ -4,7 +4,6 @@ import { useCounterStore } from '@/store/counter';
 import { useRouter } from 'vue-router';
 
 const router = useRouter('');
-
 const counterStore = useCounterStore();
 const originalBloodnations = ref([]); 
 const bloodnations = ref([]);
@@ -186,13 +185,11 @@ onMounted(fetchBloodnations);
   border-radius: 5px 5px 0 0;
 }
 
-
 .card-content h3,
 .card-content p,
 .card-content .details-link {
   margin: 4px ; 
 }
-
 
 button {
   margin-top: 10px;
@@ -221,7 +218,6 @@ button {
 .detail {
   color: blue;
 }
-
 
 .search-container {
   margin-bottom: 20px;
@@ -269,8 +265,5 @@ button {
 .name-style b {
   margin-right: 0;
 }
-
-
-
 
 </style>

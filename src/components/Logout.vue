@@ -3,9 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCounterStore } from '@/store/counter'; 
 
-
 const store = useCounterStore(); 
-
 const loggedOut = ref(false);
 const router = useRouter();
 
@@ -19,7 +17,6 @@ const cancelLogout = () => {
   router.push('/history'); 
 };
 </script>
-
 
 <template>
   <div>

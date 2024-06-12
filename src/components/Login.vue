@@ -109,7 +109,6 @@ const login = async () => {
   border-radius: 5px;
 }
 
-
 .costum-login1 {
   font-size: 24px; 
   color: black; 
