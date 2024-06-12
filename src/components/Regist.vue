@@ -86,6 +86,9 @@ const register = async () => {
   width: 600px; 
   height: 700px;
   margin-top: 70px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 .card-header {

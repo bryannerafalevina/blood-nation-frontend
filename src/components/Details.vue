@@ -60,11 +60,13 @@ onMounted(() => {
 .container {
   justify-content: center;
   align-items: center;
+  display: flex;
 }
 
 .custom-card {
   background-color: white;
   width: 350px;
+  margin-top: 100px;
 }
 
 .card-details {
@@ -72,6 +74,9 @@ onMounted(() => {
   border: 2px solid red;
   border-radius: 15px;
   text-align: center;
+  margin-top: 100px;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-title {
